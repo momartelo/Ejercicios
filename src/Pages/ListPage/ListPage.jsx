@@ -1,9 +1,11 @@
 import styles from "./ListPage.module.css";
 import React from "react";
-import Card from "../../Components/Button/Card/Card";
+import Card from "../../Components/Card/Card";
+import { useNavigate } from "react-router-dom";
+import Button from "../../Components/Button/Button";
 
 const ListPage = () => {
-  const frutas = ["Manzanas", "Peras", "Naranjas"];
+  const frutas = ["Manzanas", "Peras", "Naranjas", "Bananas", "Uvas"];
   const frutasMore = [
     {
       title: "Manzanas Rojas",
@@ -35,28 +37,40 @@ const ListPage = () => {
       moreDetails: "Origen: San Juan · Peso: 500g · Conservación: refrigerado",
     },
   ];
+  const navigate = useNavigate();
 
   return (
     <>
       <div className={styles.containerListPage}>
         <h2>Lista de productos</h2>
-        <ul>
+        <ul className={styles.containerUls}>
           {frutas.map((producto, index) => (
             <li key={index}>{producto}</li>
           ))}
         </ul>
         <ul className={styles.containerCards}>
           {frutasMore.map((producto, index) => (
-            <div className={styles.cardFrutas}>
+            <div className={styles.cardFrutas} key={index}>
               <Card
                 title={producto.title}
                 description={producto.description}
                 details={producto.moreDetails}
-                key={index}
               />
             </div>
           ))}
         </ul>
+        <div className={styles.containerButtons}>
+          <Button
+            text="Volver"
+            onClick={() => navigate(-1)}
+            className={styles.buttonBack}
+          />
+          <Button
+            text="Inicio"
+            onClick={() => navigate("/")}
+            className={styles.buttonHome}
+          />
+        </div>
       </div>
     </>
   );

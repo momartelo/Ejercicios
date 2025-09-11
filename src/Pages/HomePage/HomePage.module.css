@@ -7,10 +7,22 @@
 .containerHome {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 100%;
   height: 100vh;
+  padding-top: 1rem;
+}
+
+.containerHome > h3 {
+  padding-top: 1rem;
+}
+
+.containerButtons {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  width: 80%;
+  align-items: center;
 }
 
 .buttonClickMe {
