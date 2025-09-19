@@ -19,39 +19,6 @@
   margin-top: 20px;
 }
 
-.cardFrutas {
-  background: #fff;
-  border-radius: 12px;
-  width: 250px;
-  min-height: 220px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 15px 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.cardFrutas:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}
-
-.cardFrutas > h2 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  text-align: center; /* centrado */
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.cardFrutas > p {
-  font-size: 0.95rem;
-  text-align: center; /* centrado también */
-  margin: 5px 0;
-  color: #555;
-}
-
 .containerButtons {
   display: flex;
   width: 80%;

@@ -4,11 +4,23 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../Components/Button/Button";
 import confetti from "canvas-confetti";
 import { Alert, Snackbar } from "@mui/material";
+import ResponsiveAppBar from "../../Components/Navbar/ResponsiveNavBar";
 
 const HomePage = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+
+  const handleClickConsolaYAlerta = () => {
+    console.log("Mensaje creado en consola");
+    setAlertMessage(
+      "El mensaje por consola fue creado con exito apreta crtl+shift+I para verlo 🎉"
+    );
+    setOpen(true);
+  };
+
   const handleClick = () => {
+    setAlertMessage("Acción realizada con éxito 🎉");
     setOpen(true);
   };
   const handleClose = () => {
@@ -24,14 +36,23 @@ const HomePage = () => {
       confetti({
         particleCount: 3,
         angle: 60,
+        colors: ["#ff0000", "#fffff", "#ff0000", "#ffffff"],
         spread: 55,
         origin: { x: 0 },
       });
       confetti({
         particleCount: 3,
         angle: 120,
+
+        colors: ["#75aadb", "#fffff", "#75aadb", "#ffffff"],
         spread: 55,
         origin: { x: 1 },
+      });
+      confetti({
+        particleCount: 10,
+        spread: 70,
+        colors: ["#009A49", "#ffd200", "#009A49", "#ffd200"],
+        origin: { x: 0.5, y: 0.5 },
       });
 
       if (Date.now() < end) {
@@ -42,6 +63,7 @@ const HomePage = () => {
 
   return (
     <>
+      <ResponsiveAppBar />
       <div className={`${styles.containerHome}`}>
         <h1>Pagina Principal</h1>
         <h3>
@@ -49,6 +71,11 @@ const HomePage = () => {
           React
         </h3>
         <div className={styles.containerButtons}>
+          <Button
+            text="Mensaje por consola"
+            onClick={handleClickConsolaYAlerta}
+            className={styles.buttonList}
+          />
           <Button
             text="Click Me"
             onClick={handleClick}
@@ -64,15 +91,15 @@ const HomePage = () => {
             <Alert
               onClose={handleClose}
               severity="success"
-              variant="filled" // 👈 ESTO lo hace outlined
-              sx={{ width: "100%" }}
+              variant="filled"
+              sx={{ width: "100%", textAlign: "center" }}
             >
-              Acción realizada con éxito 🎉
+              {alertMessage}
             </Alert>
           </Snackbar>
 
           <Button
-            text="Ir a la Lista"
+            text="Productos"
             onClick={() => navigate("/ListPage")}
             className={styles.buttonList}
           />
@@ -80,6 +107,12 @@ const HomePage = () => {
           <Button
             text="Confeti"
             onClick={lanzarConfeti}
+            className={styles.buttonList}
+          />
+
+          <Button
+            text="Equipo"
+            onClick={() => navigate("/Team")}
             className={styles.buttonList}
           />
         </div>

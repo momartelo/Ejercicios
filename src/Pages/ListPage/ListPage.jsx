@@ -3,6 +3,8 @@ import React from "react";
 import Card from "../../Components/Card/Card";
 import { useNavigate } from "react-router-dom";
 import Button from "../../Components/Button/Button";
+import ResponsiveAppBar from "../../Components/Navbar/ResponsiveNavBar";
+import componentesPc from "../../Data/Components";
 
 const ListPage = () => {
   const frutas = ["Manzanas", "Peras", "Naranjas", "Bananas", "Uvas"];
@@ -41,20 +43,22 @@ const ListPage = () => {
 
   return (
     <>
+      <ResponsiveAppBar />
       <div className={styles.containerListPage}>
         <h2>Lista de productos</h2>
-        <ul className={styles.containerUls}>
+        {/* <ul className={styles.containerUls}>
           {frutas.map((producto, index) => (
             <li key={index}>{producto}</li>
           ))}
-        </ul>
+        </ul> */}
         <ul className={styles.containerCards}>
-          {frutasMore.map((producto, index) => (
+          {componentesPc.map((producto, index) => (
             <div className={styles.cardFrutas} key={index}>
               <Card
                 title={producto.title}
                 description={producto.description}
                 details={producto.moreDetails}
+                price={producto.precio}
               />
             </div>
           ))}
