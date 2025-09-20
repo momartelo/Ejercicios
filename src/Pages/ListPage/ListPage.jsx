@@ -65,7 +65,7 @@ const ListPage = () => {
         </ul>
         <div className={styles.containerButtons}>
           <Button
-            text="Volver"
+            text="Atras"
             onClick={() => navigate(-1)}
             className={styles.buttonBack}
           />

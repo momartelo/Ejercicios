@@ -1,0 +1,9 @@
+.buttonInterest {
+  padding: 8px 16px;
+  margin: 6px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  font-weight: bold;
+}

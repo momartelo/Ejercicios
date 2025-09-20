@@ -84,7 +84,7 @@ const HomePage = () => {
 
           <Snackbar
             open={open}
-            autoHideDuration={3000}
+            autoHideDuration={5000}
             onClose={handleClose}
             anchorOrigin={{ vertical: "top", horizontal: "center" }}
           >
@@ -100,7 +100,13 @@ const HomePage = () => {
 
           <Button
             text="Productos"
-            onClick={() => navigate("/ListPage")}
+            onClick={() => navigate("/listpage")}
+            className={styles.buttonList}
+          />
+
+          <Button
+            text="Proyectos"
+            onClick={() => navigate("/proyects")}
             className={styles.buttonList}
           />
 
@@ -112,7 +118,7 @@ const HomePage = () => {
 
           <Button
             text="Equipo"
-            onClick={() => navigate("/Team")}
+            onClick={() => navigate("/team")}
             className={styles.buttonList}
           />
         </div>

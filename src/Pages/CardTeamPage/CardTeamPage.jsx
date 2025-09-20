@@ -3,8 +3,11 @@ import React from "react";
 import CardTeam from "../../Components/CardTeam/CardTeam";
 import equipo from "../../Data/EquipoTalentoLab";
 import ResponsiveAppBar from "../../Components/Navbar/ResponsiveNavBar";
+import { useNavigate } from "react-router-dom";
+import Button from "../../Components/Button/Button";
 
 const CardTeamPage = () => {
+  const navigate = useNavigate();
   return (
     <>
       <ResponsiveAppBar />
@@ -21,6 +24,18 @@ const CardTeamPage = () => {
             </div>
           ))}
         </ul>
+        <div className={styles.containerButtons}>
+          <Button
+            text="Atras"
+            onClick={() => navigate(-1)}
+            className={styles.buttonBack}
+          />
+          <Button
+            text="Inicio"
+            onClick={() => navigate("/")}
+            className={styles.buttonHome}
+          />
+        </div>
       </div>
     </>
   );
