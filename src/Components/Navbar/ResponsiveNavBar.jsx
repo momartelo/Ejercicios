@@ -1,4 +1,4 @@
-import * as React from "react";
+// import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import HomeIcon from "@mui/icons-material/Home";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link as RouterLink } from "react-router-dom";
+import { useState } from "react";
 
 const pages = [
   { name: "Productos", path: "/listPage" },
@@ -28,8 +29,10 @@ const settings = [
 ];
 
 export default function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
   const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
@@ -37,8 +40,9 @@ export default function ResponsiveAppBar() {
   const handleCloseNavMenu = () => setAnchorElNav(null);
   const handleCloseUserMenu = (evt, setting) => {
     setAnchorElUser(null);
+
     if (setting?.action === "logout") {
-      // tu lógica de logout
+      setIsLoggedIn(false); // 🔴 acá deslogueás al usuario
     }
   };
 
@@ -146,42 +150,70 @@ export default function ResponsiveAppBar() {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton
-                  onClick={handleOpenUserMenu}
-                  sx={{ p: 0 }}
-                  aria-controls={anchorElUser ? "menu-appbar-user" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={Boolean(anchorElUser)}
-                >
-                  <Avatar
-                    alt="User"
-                    sx={{ bgcolor: "#1976d2", fontSize: "1rem" }}
+              {isLoggedIn ? (
+                <>
+                  <Tooltip title="Open settings">
+                    <IconButton
+                      onClick={handleOpenUserMenu}
+                      sx={{ p: 0 }}
+                      aria-controls={
+                        anchorElUser ? "menu-appbar-user" : undefined
+                      }
+                      aria-haspopup="true"
+                      aria-expanded={Boolean(anchorElUser)}
+                    >
+                      <Avatar
+                        alt="User"
+                        sx={{ bgcolor: "#1976d2", fontSize: "1rem" }}
+                      >
+                        MM
+                      </Avatar>
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    id="menu-appbar-user"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                    keepMounted
+                    transformOrigin={{ vertical: "top", horizontal: "right" }}
+                    open={Boolean(anchorElUser)}
+                    onClose={() => handleCloseUserMenu()}
                   >
-                    MM
-                  </Avatar>
-                </IconButton>
-              </Tooltip>
-              <Menu
-                id="menu-appbar-user"
-                anchorEl={anchorElUser}
-                anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                keepMounted
-                transformOrigin={{ vertical: "top", horizontal: "right" }}
-                open={Boolean(anchorElUser)}
-                onClose={() => handleCloseUserMenu()}
-              >
-                {settings.map((setting) => (
-                  <MenuItem
-                    key={setting.name}
-                    component={setting.path ? RouterLink : "button"}
-                    to={setting.path ?? undefined}
-                    onClick={() => handleCloseUserMenu(null, setting)}
+                    {settings.map((setting) => (
+                      <MenuItem
+                        key={setting.name}
+                        component={setting.path ? RouterLink : "button"}
+                        to={setting.path ?? undefined}
+                        onClick={() => handleCloseUserMenu(null, setting)}
+                      >
+                        <Typography textAlign="center">
+                          {setting.name}
+                        </Typography>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </>
+              ) : (
+                <>
+                  <Button
+                    component={RouterLink}
+                    to="/login"
+                    sx={{
+                      my: 2,
+                      color: "white",
+                      textTransform: "none",
+                      fontSize: "1.1rem",
+                      "&:hover": { color: "#d9d9d9" },
+                    }}
                   >
-                    <Typography textAlign="center">{setting.name}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
+                    Login
+                  </Button>
+                  <Button
+                    text="Loguearse"
+                    onClick={() => setIsLoggedIn(true)}
+                  />
+                </>
+              )}
             </Box>
           </Toolbar>
         </Container>

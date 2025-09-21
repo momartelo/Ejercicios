@@ -70,6 +70,7 @@ const HomePage = () => {
           Pagina donde se van haciendo los ejercicios requeridos por el curso de
           React
         </h3>
+
         <div className={styles.containerButtons}>
           <Button
             text="Mensaje por consola"
