@@ -195,23 +195,24 @@ export default function ResponsiveAppBar() {
                 </>
               ) : (
                 <>
-                  <Button
-                    component={RouterLink}
-                    to="/login"
-                    sx={{
-                      my: 2,
-                      color: "white",
-                      textTransform: "none",
-                      fontSize: "1.1rem",
-                      "&:hover": { color: "#d9d9d9" },
-                    }}
+                  <Tooltip
+                    title="Es solo un botón de prueba para loguearse hasta que esté lista la página"
+                    arrow
                   >
-                    Login
-                  </Button>
-                  <Button
-                    text="Loguearse"
-                    onClick={() => setIsLoggedIn(true)}
-                  />
+                    <Button
+                      onClick={() => setIsLoggedIn(true)}
+                      sx={{
+                        my: 2,
+                        color: "white",
+                        backgroundColor: "#1976d2",
+                        textTransform: "none",
+                        fontSize: "1.1rem",
+                        "&:hover": { color: "#d9d9d9" },
+                      }}
+                    >
+                      Loguearse
+                    </Button>
+                  </Tooltip>
                 </>
               )}
             </Box>
