@@ -13,8 +13,12 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import HomeIcon from "@mui/icons-material/Home";
 import AdbIcon from "@mui/icons-material/Adb";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Badge from "@mui/material/Badge";
 import { Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
+import { useCart } from "../../Context/CartContext";
+import { useAuth } from "../../Context/AuthContex";
 
 const pages = [
   { name: "Productos", path: "/listPage" },
@@ -32,7 +36,9 @@ export default function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { carrito } = useCart();
+
+  const { isLoggedIn, login, logout } = useAuth();
 
   const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
   const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
@@ -42,7 +48,7 @@ export default function ResponsiveAppBar() {
     setAnchorElUser(null);
 
     if (setting?.action === "logout") {
-      setIsLoggedIn(false); // 🔴 acá deslogueás al usuario
+      logout(); // ✅ Esto viene de useAuth
     }
   };
 
@@ -54,6 +60,7 @@ export default function ResponsiveAppBar() {
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
+            {/* Botón de inicio */}
             <Tooltip title="Inicio" arrow>
               <IconButton
                 component={RouterLink}
@@ -63,13 +70,15 @@ export default function ResponsiveAppBar() {
                 sx={{
                   display: { xs: "none", md: "flex" },
                   mr: 1,
-                  color: "white", // color normal
-                  "&:hover": { color: "#d9d9d9" }, // color al pasar el mouse
+                  color: "white",
+                  "&:hover": { color: "#d9d9d9" },
                 }}
               >
                 <HomeIcon sx={{ fontSize: 40 }} />
               </IconButton>
             </Tooltip>
+
+            {/* Menú hamburguesa en mobile */}
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -106,6 +115,7 @@ export default function ResponsiveAppBar() {
               </Menu>
             </Box>
 
+            {/* Logo en mobile */}
             <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
             <Typography
               variant="h5"
@@ -126,6 +136,7 @@ export default function ResponsiveAppBar() {
               LOGO
             </Typography>
 
+            {/* Links en desktop */}
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
                 <Button
@@ -136,12 +147,11 @@ export default function ResponsiveAppBar() {
                   sx={{
                     my: 2,
                     mx: 1.5,
-                    color: "white",
                     display: "block",
                     textTransform: "none",
                     fontSize: "1.25rem",
-                    color: "white", // color normal
-                    "&:hover": { color: "#d9d9d9" }, // color al pasar el mouse
+                    color: "white",
+                    "&:hover": { color: "#d9d9d9" },
                   }}
                 >
                   {page.name}
@@ -149,7 +159,33 @@ export default function ResponsiveAppBar() {
               ))}
             </Box>
 
-            <Box sx={{ flexGrow: 0 }}>
+            {/* Sección derecha: carrito + login/avatar */}
+            <Box
+              sx={{
+                flexGrow: 0,
+                display: "flex",
+                alignItems: "center",
+                gap: 2,
+              }}
+            >
+              {/* 🛒 Carrito */}
+              <IconButton
+                component={RouterLink}
+                to="/cart"
+                aria-label="Carrito"
+                sx={{ color: "white" }}
+              >
+                <Badge
+                  badgeContent={carrito.reduce(
+                    (acc, item) => acc + item.cantidad,
+                    0
+                  )}
+                  color="error"
+                >
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
+
               {isLoggedIn ? (
                 <>
                   <Tooltip title="Open settings">
@@ -200,7 +236,7 @@ export default function ResponsiveAppBar() {
                     arrow
                   >
                     <Button
-                      onClick={() => setIsLoggedIn(true)}
+                      onClick={login}
                       sx={{
                         my: 2,
                         color: "white",
@@ -219,7 +255,7 @@ export default function ResponsiveAppBar() {
           </Toolbar>
         </Container>
       </AppBar>
-      <Toolbar />
+      {/* <Toolbar /> */}
     </>
   );
 }

@@ -17,6 +17,7 @@ const CardProyect = ({ title, description, onShowAlert }) => {
           className={styles.buttonCardProyect}
           onClick={handleClick}
           text="Explorar proyecto"
+          title="Al hacer click se generara un mensaje por consola"
         />
       </div>
     </div>

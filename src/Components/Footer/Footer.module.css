@@ -1,0 +1,43 @@
+.containerFooter {
+  width: 100%;
+  background-color: #1f2937;
+  color: #ffffff;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  margin-top: auto; /* solo funciona si el layout general usa flexbox */
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.containerImages {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 40px;
+  height: auto;
+}
+
+.containerCopyright > p {
+  font-size: 0.75rem;
+}
+
+.containerSocialIcons {
+  display: flex;
+  column-gap: 0.75rem;
+  align-items: center;
+}
+
+.socialIcons {
+  width: 24px;
+  height: auto;
+}

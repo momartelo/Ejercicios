@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.containerCheckoutPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.containerTotalPay {
+  display: flex;
+  margin-top: 5rem;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.totalPayValue {
+  display: flex;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.containerTypesPay {
+  display: flex;
+  column-gap: 1rem;
+  justify-content: center;
+  width: 80%;
+  margin-top: 2rem;
+}
+
+.containerTypesPay > button {
+  background-color: #f9fafb; /* gris clarito */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+}

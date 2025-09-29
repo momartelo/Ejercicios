@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import styles from "./InterestGalleryButton.module.css";
+import Button from "../Button/Button";
+import { lanzarConfeti } from "../../Functions/Confeti";
+import { Alert, Snackbar } from "@mui/material";
 
 // Genera un color hex random
 const getRandomColor = () => {
@@ -22,25 +25,49 @@ const getContrastColor = (hexColor) => {
   return luminance > 0.5 ? "black" : "white";
 };
 
-const InterestGalleryButton = ({ name }) => {
+const InterestGalleryButton = ({ name, className = "" }) => {
   const [bgColor, setBgColor] = useState("#e5e5e5"); // color inicial
+  const [open, setOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const handleClick = () => {
     const newColor = getRandomColor();
     setBgColor(newColor);
+    const mensaje = `Acción realizada con éxito 🎉\nColor del botón: ${newColor}`;
+    setAlertMessage(mensaje);
+    setOpen(true);
+    lanzarConfeti();
   };
 
+  const handleClose = () => setOpen(false);
+
   return (
-    <button
-      className={styles.buttonInterest}
-      style={{
-        backgroundColor: bgColor,
-        color: getContrastColor(bgColor),
-      }}
-      onClick={handleClick}
-    >
-      {name}
-    </button>
+    <>
+      <Button
+        text={name}
+        onClick={handleClick}
+        className={className}
+        style={{
+          backgroundColor: bgColor,
+          color: getContrastColor(bgColor),
+        }}
+      />
+      <Snackbar
+        open={open}
+        autoHideDuration={5000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleClose}
+          severity="success"
+          variant="filled"
+          sx={{ width: "100%", textAlign: "center" }}
+        >
+          <p className={styles.textoAlert}>{alertMessage}</p>
+        </Alert>
+      </Snackbar>
+    </>
   );
 };
 

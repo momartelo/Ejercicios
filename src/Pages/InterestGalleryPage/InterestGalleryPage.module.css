@@ -1,0 +1,39 @@
+.containerInterestGalleryPage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  background: #333;
+  box-sizing: border-box;
+}
+
+.containerInterestGalleryPage > h2 {
+  text-align: center;
+}
+
+.containerButtons {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  justify-content: center;
+  padding-top: 3rem;
+}
+
+.buttonInterest {
+  padding: 8px 16px;
+  margin: 6px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  font-weight: bold;
+  outline: none;
+  height: 5rem;
+  width: 10rem;
+  display: flex;
+  justify-content: center;
+}
+
+.buttonInterest:focus {
+  outline: none;
+}
