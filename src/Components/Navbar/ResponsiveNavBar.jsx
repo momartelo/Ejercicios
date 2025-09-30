@@ -21,9 +21,14 @@ import { useCart } from "../../Context/CartContext";
 import { useAuth } from "../../Context/AuthContex";
 
 const pages = [
-  { name: "Productos", path: "/listPage" },
   { name: "Proyectos", path: "/proyects" },
   { name: "Equipo", path: "/team" },
+  { name: "Intereses", path: "/interest" },
+];
+
+const productMenuItems = [
+  { name: "Productos", path: "/listpage" },
+  { name: "Productos API", path: "/productsAPI" },
 ];
 
 const settings = [
@@ -32,23 +37,28 @@ const settings = [
   { name: "Logout", action: "logout" },
 ];
 
+// ... imports y constantes previas
+
 export default function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [isProductMenuOpen, setIsProductMenuOpen] = useState(false);
 
   const { carrito } = useCart();
-
   const { isLoggedIn, login, logout } = useAuth();
 
   const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
   const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
 
+  // Manejo del menú de productos
+  const handleOpenProductMenu = () => setIsProductMenuOpen(true);
+  const handleCloseProductMenu = () => setIsProductMenuOpen(false);
+
   const handleCloseNavMenu = () => setAnchorElNav(null);
   const handleCloseUserMenu = (evt, setting) => {
     setAnchorElUser(null);
-
     if (setting?.action === "logout") {
-      logout(); // ✅ Esto viene de useAuth
+      logout();
     }
   };
 
@@ -102,6 +112,18 @@ export default function ResponsiveAppBar() {
                 keepMounted
                 sx={{ display: { xs: "block", md: "none" } }}
               >
+                {/* Menú de productos en mobile */}
+                {productMenuItems.map((item) => (
+                  <MenuItem
+                    key={item.name}
+                    component={RouterLink}
+                    to={item.path}
+                    onClick={handleCloseNavMenu}
+                  >
+                    <Typography textAlign="center">{item.name}</Typography>
+                  </MenuItem>
+                ))}
+                {/* Resto de páginas en mobile */}
                 {pages.map((page) => (
                   <MenuItem
                     key={page.name}
@@ -138,6 +160,72 @@ export default function ResponsiveAppBar() {
 
             {/* Links en desktop */}
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+              {/* Menú desplegable de Productos - SOLUCIÓN PERSONALIZADA */}
+              <Box
+                onMouseEnter={handleOpenProductMenu}
+                onMouseLeave={handleCloseProductMenu}
+                sx={{ position: "relative" }}
+              >
+                <Button
+                  disableFocusRipple
+                  sx={{
+                    my: 2,
+                    mx: 1.5,
+                    display: "block",
+                    textTransform: "none",
+                    fontSize: "1.25rem",
+                    color: "white",
+                    "&:hover": {
+                      color: "#d9d9d9",
+                      backgroundColor: "rgba(255, 255, 255, 0.04)", // ← Fondo sutil en hover
+                    },
+                    "&:focus": {
+                      outline: "none", // ← Outline sutil
+                    },
+                  }}
+                >
+                  Productos
+                </Button>
+                {isProductMenuOpen && (
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: "100%",
+                      left: 0,
+                      backgroundColor: "#1f2937",
+                      color: "white",
+                      minWidth: "200px",
+                      boxShadow:
+                        "0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)",
+                      borderRadius: 1,
+                      zIndex: 1301,
+                      py: 0,
+                    }}
+                    onMouseLeave={handleCloseProductMenu}
+                  >
+                    {productMenuItems.map((item) => (
+                      <MenuItem
+                        key={item.name}
+                        component={RouterLink}
+                        to={item.path}
+                        onClick={handleCloseProductMenu}
+                        sx={{
+                          "&:hover": {
+                            backgroundColor: "#374151",
+                          },
+                          color: "white",
+                          py: 1,
+                          px: 2,
+                        }}
+                      >
+                        <Typography textAlign="center">{item.name}</Typography>
+                      </MenuItem>
+                    ))}
+                  </Box>
+                )}
+              </Box>
+
+              {/* Resto de páginas */}
               {pages.map((page) => (
                 <Button
                   key={page.name}

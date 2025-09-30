@@ -11,7 +11,7 @@ const NotFoundPage = () => {
       <MainLayout>
         <div className={styles.containerNotFoundPage}>
           <h2>404</h2>
-          <p>NotFoundPage</p>
+          <p>Not Found Page</p>
           <div className={styles.containerButtons}>
             <Button
               text="Inicio"

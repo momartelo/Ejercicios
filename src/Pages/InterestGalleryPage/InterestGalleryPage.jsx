@@ -4,8 +4,11 @@ import interests from "../../Data/Interest";
 import InterestGalleryButton from "../../Components/InterestGalleryButton/InterestGalleryButton";
 import ResponsiveAppBar from "../../Components/Navbar/ResponsiveNavBar";
 import MainLayout from "../../Layout/MainLayout";
+import Button from "../../Components/Button/Button";
+import { useNavigate } from "react-router-dom";
 
 const InterestGalleryPage = () => {
+  const navigate = useNavigate();
   return (
     <>
       <MainLayout darkBackground>
@@ -19,6 +22,18 @@ const InterestGalleryPage = () => {
                 className={styles.buttonInterest}
               />
             ))}
+          </div>
+          <div className={styles.containerButtons2}>
+            <Button
+              text="Atras"
+              onClick={() => navigate(-1)}
+              className={styles.buttonBack}
+            />
+            <Button
+              text="Inicio"
+              onClick={() => navigate("/")}
+              className={styles.buttonHome}
+            />
           </div>
         </div>
       </MainLayout>
