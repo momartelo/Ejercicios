@@ -10,10 +10,12 @@
 
 .containerNotFoundPage > h2 {
   font-size: 3rem;
+  color: #333;
 }
 
 .containerNotFoundPage > p {
   font-size: 1.75rem;
+  color: #333;
 }
 
 .containerButtons {

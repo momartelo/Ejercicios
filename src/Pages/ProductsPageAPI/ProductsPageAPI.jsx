@@ -3,11 +3,14 @@ import styles from "./ProductsPageAPI.module.css";
 import { getProductsAPI } from "../../Functions/FetchAPI";
 
 import React, { useEffect, useState } from "react";
+import Card from "../../Components/Card/Card";
+import { useCart } from "../../Context/CartContext";
 
 const ProductsPageAPI = () => {
   const [productos, setProductos] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { agregarAlCarrito } = useCart();
 
   useEffect(() => {
     const fetchProductosAPI = async () => {
@@ -32,11 +35,19 @@ const ProductsPageAPI = () => {
         <div className={styles.containerProductsAPI}>
           <ul className={styles.containerUlProduct}>
             {productos.map((producto, index) => (
-              <li key={index} className={styles.product}>
-                <p>{producto.name}</p>
-                <p>${producto.price}</p>
-                <img src={producto.image} alt="" />
-              </li>
+              <div key={index}>
+                <Card
+                  image={producto.image}
+                  title={producto.name}
+                  price={producto.price}
+                  onAddToCart={() => agregarAlCarrito(producto)}
+                  className={styles.containerCard}
+                  titleClass={styles.title}
+                  priceClass={styles.price}
+                  buttonClass={styles.buttonAdd}
+                  imageClass={styles.imageClass}
+                />
+              </div>
             ))}
           </ul>
         </div>

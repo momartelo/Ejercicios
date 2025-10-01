@@ -8,6 +8,7 @@ import CartPage from "./Pages/CartPage/CartPage";
 import CheckoutPage from "./Pages/CheckoutPage/CheckoutPage";
 import InterestGalleryPage from "./Pages/InterestGalleryPage/InterestGalleryPage";
 import ProductsPageAPI from "./Pages/ProductsPageAPI/ProductsPageAPI";
+import ProductsPageFakeAPI from "./Pages/ProductsPageFakeAPI/ProductsPageFakeAPI";
 
 function Approuter() {
   return (
@@ -20,7 +21,8 @@ function Approuter() {
       <Route path="/cart" element={<CartPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/interest" element={<InterestGalleryPage />} />
-      <Route path="/productsAPI" element={<ProductsPageAPI />} />
+      <Route path="/productsmockAPI" element={<ProductsPageAPI />} />
+      <Route path="/productsfakeAPI" element={<ProductsPageFakeAPI />} />
     </Routes>
   );
 }

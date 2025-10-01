@@ -28,7 +28,8 @@ const pages = [
 
 const productMenuItems = [
   { name: "Productos", path: "/listpage" },
-  { name: "Productos API", path: "/productsAPI" },
+  { name: "Productos MockAPI", path: "/productsmockAPI" },
+  { name: "Productos FakeAPI", path: "/productsFakeAPI" },
 ];
 
 const settings = [

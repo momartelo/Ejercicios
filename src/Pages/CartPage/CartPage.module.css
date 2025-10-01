@@ -63,11 +63,13 @@
 .containerCartProduct > h3 {
   text-align: center;
   margin-bottom: 1rem;
+  color: #333;
 }
 
 .containerCartProduct > p {
   text-align: center;
   margin-bottom: 1rem;
+  color: #333;
 }
 
 .containerAmount {
@@ -77,6 +79,10 @@
   column-gap: 1rem;
   margin-bottom: 1rem;
   width: 100%;
+}
+
+.containerAmount > p {
+  color: #333;
 }
 
 .buttonClearCart {
@@ -138,6 +144,10 @@
 .totalResumen {
   display: flex;
   margin-top: 1rem;
+}
+
+.totalResumen > h3 {
+  color: #333;
 }
 
 .buttonList {

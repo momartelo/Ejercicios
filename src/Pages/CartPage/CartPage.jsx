@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../Context/AuthContex";
 import { Alert, Snackbar } from "@mui/material";
 import MainLayout from "../../Layout/MainLayout";
+import { normalizarPrecio } from "../../Functions/PriceFormatter"; // Importar la función
 
 const CartPage = () => {
   const { carrito, limpiarCarrito, incrementarCantidad, decrementarCantidad } =
@@ -21,26 +22,36 @@ const CartPage = () => {
     if (isLoggedIn) {
       navigate("/checkout", { state: { total: totalAcumulado } });
     } else {
-      setOpenSnackbar(true); // Mostramos el mensaje
-      setTimeout(() => navigate("/login"), 2000); // Redirige después de 2 segundos
+      setOpenSnackbar(true);
+      setTimeout(() => navigate("/login"), 2000);
     }
+  };
+
+  // Función para formatear precio para mostrar (opcional)
+  const formatearPrecioParaMostrar = (precio) => {
+    if (typeof precio === "number") {
+      return `$${precio.toLocaleString("es-AR")}`;
+    }
+    return precio; // Dejar como está si es string con formato
   };
 
   useEffect(() => {
     const total = carrito.reduce((acumulado, producto) => {
-      const precioLimpio = parseFloat(
-        producto.precio
-          .replace(/[^\d,\.]/g, "")
-          .replace(/\./g, "")
-          .replace(",", ".")
-      );
-      const subtotal =
-        producto.cantidad * (isNaN(precioLimpio) ? 0 : precioLimpio);
-      return acumulado + subtotal;
+      try {
+        const precioString = producto.precio ?? producto.price ?? "0";
+        const precioValido = normalizarPrecio(precioString);
+        const cantidad = producto.cantidad || 1;
+        const subtotal = cantidad * precioValido;
+        return acumulado + subtotal;
+      } catch (error) {
+        console.error("Error calculando subtotal:", error, producto);
+        return acumulado;
+      }
     }, 0);
 
     setTotalAcumulado(total);
   }, [carrito]);
+
   return (
     <>
       <MainLayout>
@@ -69,50 +80,45 @@ const CartPage = () => {
             <>
               <div className={styles.containerProducts}>
                 <ul className={styles.containerList}>
-                  {carrito.map((producto, index) => (
-                    <li key={index} className={styles.containerCartProduct}>
-                      <h3>{producto.title}</h3>
-                      <p>
-                        <strong>Precio: {producto.precio}</strong>
-                      </p>
-                      <div className={styles.containerAmount}>
-                        <button
-                          onClick={() => incrementarCantidad(index)}
-                          className={styles.buttonsIncDec}
-                        >
-                          +
-                        </button>
-                        <p>Cantidad: {producto.cantidad}</p>
-                        <button
-                          onClick={() => decrementarCantidad(index)}
-                          className={styles.buttonsIncDec}
-                        >
-                          -
-                        </button>
-                      </div>
-                      <p>
-                        Total:{" "}
-                        {(() => {
-                          const precioLimpio = parseFloat(
-                            producto.precio
-                              .replace(/[^\d,\.]/g, "") // quita $ y otros
-                              .replace(/\./g, "") // quita separadores de miles
-                              .replace(",", ".") // convierte coma decimal a punto
-                          );
-                          const total = producto.cantidad * precioLimpio;
-                          return isNaN(total)
-                            ? "Precio inválido"
-                            : `$${total.toLocaleString()}`;
-                        })()}
-                      </p>
-                    </li>
-                  ))}
+                  {carrito.map((producto, index) => {
+                    const precioString =
+                      producto.precio ?? producto.price ?? "0";
+                    const precioValido = normalizarPrecio(precioString);
+                    const subtotal = producto.cantidad * precioValido;
+
+                    return (
+                      <li key={index} className={styles.containerCartProduct}>
+                        <h3>{producto.title ?? producto.name}</h3>
+                        <p>
+                          <strong>
+                            Precio: ${formatearPrecioParaMostrar(precioString)}
+                          </strong>
+                        </p>
+                        <div className={styles.containerAmount}>
+                          <button
+                            onClick={() => incrementarCantidad(index)}
+                            className={styles.buttonsIncDec}
+                          >
+                            +
+                          </button>
+                          <p>Cantidad: {producto.cantidad}</p>
+                          <button
+                            onClick={() => decrementarCantidad(index)}
+                            className={styles.buttonsIncDec}
+                          >
+                            -
+                          </button>
+                        </div>
+                        <p>Total: ${subtotal.toLocaleString("es-AR")}</p>
+                      </li>
+                    );
+                  })}
                 </ul>
                 <div className={styles.totalResumen}>
                   <h3>
                     Total a pagar:{" "}
                     <span style={{ color: "green" }}>
-                      ${totalAcumulado.toLocaleString()}
+                      ${totalAcumulado.toLocaleString("es-AR")}
                     </span>
                   </h3>
                 </div>
