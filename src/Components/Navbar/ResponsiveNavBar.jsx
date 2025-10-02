@@ -19,11 +19,12 @@ import { Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
 import { useCart } from "../../Context/CartContext";
 import { useAuth } from "../../Context/AuthContex";
+import styles from "./ResponsiveNavBar.module.css";
 
 const pages = [
   { name: "Proyectos", path: "/proyects" },
+  { name: "Ejercicios", path: "/exercises" },
   { name: "Equipo", path: "/team" },
-  { name: "Intereses", path: "/interest" },
 ];
 
 const productMenuItems = [

@@ -18,13 +18,18 @@ const ListPage = () => {
           <h2>Lista de productos</h2>
           <ul className={styles.containerCards}>
             {componentesPc.map((producto, index) => (
-              <div className={styles.cardFrutas} key={index}>
+              <div key={index}>
                 <Card
                   title={producto.title}
                   description={producto.description}
                   details={producto.moreDetails}
                   price={producto.precio}
                   onAddToCart={() => agregarAlCarrito(producto)}
+                  className={styles.containerCard}
+                  titleClass={styles.title}
+                  priceClass={styles.price}
+                  buttonClass={styles.buttonAdd}
+                  imageClass={styles.imageClass}
                 />
               </div>
             ))}

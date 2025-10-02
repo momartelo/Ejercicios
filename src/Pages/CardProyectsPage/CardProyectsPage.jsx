@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../Components/Button/Button";
 import CardProyect from "../../Components/CardProyect/CardProyect";
-import ResponsiveAppBar from "../../Components/Navbar/ResponsiveNavBar";
 import projects from "../../Data/Proyects";
 import styles from "./CardProyectsPage.module.css";
 import { Alert, Snackbar } from "@mui/material";

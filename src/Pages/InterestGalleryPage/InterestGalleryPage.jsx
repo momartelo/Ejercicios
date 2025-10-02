@@ -14,6 +14,7 @@ const InterestGalleryPage = () => {
       <MainLayout darkBackground>
         <div className={styles.containerInterestGalleryPage}>
           <h2>Pagina de Intereses</h2>
+          <p>Haga click en los botones para que cambien de color</p>
           <div className={styles.containerButtons}>
             {interests.map((interest, index) => (
               <InterestGalleryButton

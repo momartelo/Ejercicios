@@ -6,33 +6,25 @@ import Button from "../../Components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../Context/AuthContex";
-import { Alert, Snackbar } from "@mui/material";
 import MainLayout from "../../Layout/MainLayout";
-import { normalizarPrecio } from "../../Functions/PriceFormatter"; // Importar la función
+import { normalizarPrecio } from "../../Functions/PriceFormatter";
 
 const CartPage = () => {
   const { carrito, limpiarCarrito, incrementarCantidad, decrementarCantidad } =
     useCart();
   const navigate = useNavigate();
   const [totalAcumulado, setTotalAcumulado] = useState(0);
-  const { isLoggedIn } = useAuth();
-  const [openSnackbar, setOpenSnackbar] = useState(false);
 
+  // ✅ SIMPLE - La protección está en las rutas
   const handlePago = () => {
-    if (isLoggedIn) {
-      navigate("/checkout", { state: { total: totalAcumulado } });
-    } else {
-      setOpenSnackbar(true);
-      setTimeout(() => navigate("/login"), 2000);
-    }
+    navigate("/checkout", { state: { total: totalAcumulado } });
   };
 
-  // Función para formatear precio para mostrar (opcional)
   const formatearPrecioParaMostrar = (precio) => {
     if (typeof precio === "number") {
       return `$${precio.toLocaleString("es-AR")}`;
     }
-    return precio; // Dejar como está si es string con formato
+    return precio;
   };
 
   useEffect(() => {
@@ -139,21 +131,6 @@ const CartPage = () => {
                 <button className={styles.buttonBuy} onClick={handlePago}>
                   Ir a Pagar
                 </button>
-                <Snackbar
-                  open={openSnackbar}
-                  autoHideDuration={3000}
-                  onClose={() => setOpenSnackbar(false)}
-                  anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                >
-                  <Alert
-                    onClose={() => setOpenSnackbar(false)}
-                    severity="warning"
-                    variant="filled"
-                    sx={{ width: "100%", textAlign: "center" }}
-                  >
-                    Debés iniciar sesión para continuar con la compra.
-                  </Alert>
-                </Snackbar>
               </div>
             </>
           )}
