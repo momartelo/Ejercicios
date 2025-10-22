@@ -1,9 +1,20 @@
 import axios from "axios";
 
 export const getProductsAPI = async () => {
-  const api_URL = import.meta.env.VITE_API_URL;
+  const apiUrl = import.meta.env.VITE_PAGE_API_URL;
   try {
-    const response = await axios.get(api_URL);
+    const response = await axios.get(apiUrl);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    throw new Error("Error al obtener los datos");
+  }
+};
+
+export const getProductsFakeAPI = async () => {
+  const apiFakeUrl = import.meta.env.VITE_FAKE_API_URL;
+  try {
+    const response = await axios.get(apiFakeUrl);
     return response.data;
   } catch (error) {
     console.error("Error fetching products:", error);
