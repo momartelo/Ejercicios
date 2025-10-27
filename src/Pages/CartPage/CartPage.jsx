@@ -57,11 +57,6 @@ const CartPage = () => {
               </p>
               <div className={styles.buttons}>
                 <Button
-                  text="Productos"
-                  onClick={() => navigate("/listpage")}
-                  className={styles.buttonList}
-                />
-                <Button
                   text="Inicio"
                   onClick={() => navigate("/")}
                   className={styles.buttonHome}
@@ -80,12 +75,18 @@ const CartPage = () => {
 
                     return (
                       <li key={index} className={styles.containerCartProduct}>
-                        <h3>{producto.title ?? producto.name}</h3>
-                        <p>
-                          <strong>
-                            Precio: ${formatearPrecioParaMostrar(precioString)}
-                          </strong>
-                        </p>
+                        <div className={styles.containerImage}>
+                          <img src={producto.image} alt="" />
+                        </div>
+                        <div className={styles.containerName}>
+                          <h3>{producto.title ?? producto.name}</h3>
+                        </div>
+                        <div className={styles.containerPrice}>
+                          <p>
+                            Precio unitario:{" "}
+                            {formatearPrecioParaMostrar(precioString)}
+                          </p>
+                        </div>
                         <div className={styles.containerAmount}>
                           <button
                             onClick={() => incrementarCantidad(index)}
@@ -101,7 +102,9 @@ const CartPage = () => {
                             -
                           </button>
                         </div>
-                        <p>Total: ${subtotal.toLocaleString("es-AR")}</p>
+                        <div className={styles.containerTotal}>
+                          <p>Total: ${subtotal.toLocaleString("es-AR")}</p>
+                        </div>
                       </li>
                     );
                   })}
@@ -124,7 +127,7 @@ const CartPage = () => {
                 </button>
                 <button
                   className={styles.buttonBuyMore}
-                  onClick={() => navigate("/listpage")}
+                  onClick={() => navigate("/")}
                 >
                   Seguir Comprando
                 </button>

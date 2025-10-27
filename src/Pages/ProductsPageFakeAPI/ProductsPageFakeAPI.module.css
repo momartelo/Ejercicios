@@ -23,7 +23,7 @@
   background: #fff;
   border-radius: 12px;
   width: 200px;
-  min-height: 250px; /* un poco más alta para ver bien la diferencia */
+  min-height: 300px; /* un poco más alta para ver bien la diferencia */
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* reparte espacio */
@@ -40,10 +40,17 @@
 }
 
 .title {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1rem;
+  font-family: Arial;
+  font-size: 0.9rem;
   font-weight: 600;
   min-height: 3.75rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  display: box; /* opcional, para compatibilidad futura */
+  -webkit-line-clamp: 2; /* Chrome, Safari, Edge */
+  line-clamp: 2; /* estándar futura */
+  -webkit-box-orient: vertical;
 }
 
 .price {
@@ -72,6 +79,7 @@
 }
 
 .imageClass {
-  width: 100px;
-  height: auto;
+  width: 50%;
+  height: 100px;
+  object-fit: contain;
 }

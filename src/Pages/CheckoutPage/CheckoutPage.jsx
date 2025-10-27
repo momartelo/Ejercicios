@@ -13,11 +13,6 @@ const CheckoutPage = () => {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate("/"); // O podés redirigir a "/login"
-    }
-  }, [isLoggedIn, navigate]);
   return (
     <>
       <MainLayout>
@@ -48,3 +43,9 @@ const CheckoutPage = () => {
 };
 
 export default CheckoutPage;
+
+// useEffect(() => {
+//   if (!isLoggedIn) {
+//     navigate("/"); // O podés redirigir a "/login"
+//   }
+// }, [isLoggedIn, navigate]);

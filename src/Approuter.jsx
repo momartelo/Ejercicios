@@ -15,12 +15,11 @@ import PrivateRoutes from "./Components/PrivateRoutes";
 function Approuter() {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<ProductsPageFakeAPI />} />
       <Route path="/listPage" element={<ListPage />} />
       <Route path="/team" element={<CardTeamPage />} />
       <Route path="/proyects" element={<CardProyectsPage />} />
       <Route path="/cart" element={<CartPage />} />
-      <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/interest" element={<InterestGalleryPage />} />
       <Route path="/productsmockAPI" element={<ProductsPageAPI />} />
       <Route path="/productsfakeAPI" element={<ProductsPageFakeAPI />} />

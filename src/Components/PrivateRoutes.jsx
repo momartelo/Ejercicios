@@ -8,7 +8,7 @@ const PrivateRoutes = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate("/");
+      navigate("/cart");
     }
   }, [isLoggedIn, navigate]);
 

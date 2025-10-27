@@ -15,6 +15,7 @@ export const getProductsFakeAPI = async () => {
   const apiFakeUrl = import.meta.env.VITE_FAKE_API_URL;
   try {
     const response = await axios.get(apiFakeUrl);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching products:", error);

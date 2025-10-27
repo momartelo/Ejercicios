@@ -5,14 +5,17 @@ import ScrollToTop from "./Hooks/ScrollToTop";
 import "./index.css";
 import { CartProvider } from "./Context/CartContext";
 import { AuthProvider } from "./Context/AuthContex";
+import { AlertProvider } from "./Context/AlertContext";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <AuthProvider>
-      <CartProvider>
-        <ScrollToTop />
-        <Approuter />
-      </CartProvider>
-    </AuthProvider>
+    <AlertProvider>
+      <AuthProvider>
+        <CartProvider>
+          <ScrollToTop />
+          <Approuter />
+        </CartProvider>
+      </AuthProvider>
+    </AlertProvider>
   </BrowserRouter>
 );

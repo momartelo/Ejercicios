@@ -33,7 +33,6 @@ const Card = ({
   return (
     <div className={className} style={style}>
       {image && <img src={image} alt={title} className={imageClass} />}{" "}
-      {/* 👈 condicional */}
       <h2 className={titleClass}>{title}</h2>
       <p className={descriptionClass}>{description}</p>
       <p className={descriptionClass}>{details}</p>
