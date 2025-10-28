@@ -1,6 +1,6 @@
 import styles from "./HomePage.module.css";
 import MainLayout from "../../Layout/MainLayout";
-import ButtonMui from "../../Components/ButtonMui/ButtonMuii";
+import ButtonMui from "../../Components/ButtonMuii/ButtonMui";
 import SaveIcon from "@mui/icons-material/Save";
 import Button from "../../Components/Button/Button";
 
