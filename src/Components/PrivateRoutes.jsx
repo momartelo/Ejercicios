@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useAuth } from "../Context/AuthContex";
 import { Outlet, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const PrivateRoutes = () => {
   const { isLoggedIn } = useAuth();
@@ -8,6 +9,7 @@ const PrivateRoutes = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
+      Swal.fire("Debe estar Logueado para acceder a esta pagina");
       navigate("/cart");
     }
   }, [isLoggedIn, navigate]);

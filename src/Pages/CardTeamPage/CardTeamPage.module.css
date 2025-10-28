@@ -4,10 +4,9 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  min-height: 100vh;
-  padding: 6rem 0;
+
+  padding: 6rem 1rem;
   color: #333;
-  background-color: #f9fafb; /* gris clarito */
 }
 
 .containerCards {

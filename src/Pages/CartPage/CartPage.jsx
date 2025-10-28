@@ -7,7 +7,10 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../Context/AuthContex";
 import MainLayout from "../../Layout/MainLayout";
-import { normalizarPrecio } from "../../Functions/PriceFormatter";
+import {
+  formatearPrecioParaMostrar,
+  normalizarPrecio,
+} from "../../Functions/PriceFormatter";
 
 const CartPage = () => {
   const { carrito, limpiarCarrito, incrementarCantidad, decrementarCantidad } =
@@ -20,12 +23,12 @@ const CartPage = () => {
     navigate("/checkout", { state: { total: totalAcumulado } });
   };
 
-  const formatearPrecioParaMostrar = (precio) => {
-    if (typeof precio === "number") {
-      return `$${precio.toLocaleString("es-AR")}`;
-    }
-    return precio;
-  };
+  // const formatearPrecioParaMostrar = (precio) => {
+  //   if (typeof precio === "number") {
+  //     return `$${precio.toLocaleString("es-AR")}`;
+  //   }
+  //   return precio;
+  // };
 
   useEffect(() => {
     const total = carrito.reduce((acumulado, producto) => {
@@ -83,7 +86,7 @@ const CartPage = () => {
                         </div>
                         <div className={styles.containerPrice}>
                           <p>
-                            Precio unitario:{" "}
+                            Precio unitario: $
                             {formatearPrecioParaMostrar(precioString)}
                           </p>
                         </div>
@@ -103,7 +106,7 @@ const CartPage = () => {
                           </button>
                         </div>
                         <div className={styles.containerTotal}>
-                          <p>Total: ${subtotal.toLocaleString("es-AR")}</p>
+                          <p>Total: ${formatearPrecioParaMostrar(subtotal)}</p>
                         </div>
                       </li>
                     );
@@ -113,7 +116,7 @@ const CartPage = () => {
                   <h3>
                     Total a pagar:{" "}
                     <span style={{ color: "green" }}>
-                      ${totalAcumulado.toLocaleString("es-AR")}
+                      ${formatearPrecioParaMostrar(totalAcumulado)}
                     </span>
                   </h3>
                 </div>

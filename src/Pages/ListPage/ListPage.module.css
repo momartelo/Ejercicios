@@ -9,9 +9,8 @@
   align-items: center;
   padding: 6rem 0;
   width: 100%;
-  min-height: 100vh;
+
   color: #333;
-  background-color: #f9fafb; /* gris clarito */
 }
 
 .containerListPage > h2 {

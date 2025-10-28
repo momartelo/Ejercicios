@@ -26,3 +26,12 @@ export const normalizarPrecio = (precioString) => {
     );
   }
 };
+
+export const formatearPrecioParaMostrar = (precio) => {
+  const num = Number(precio);
+  if (isNaN(num)) return precio;
+  return num.toLocaleString("es-AR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+};

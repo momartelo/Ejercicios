@@ -11,8 +11,6 @@
   align-items: center;
   width: 100%;
   color: #333;
-  min-height: 100vh;
-  background: #e8e8e8;
 }
 .containerHome > h2 {
   margin-top: 2rem;

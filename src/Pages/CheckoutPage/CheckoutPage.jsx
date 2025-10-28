@@ -1,11 +1,11 @@
 import styles from "./CheckoutPage.module.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { emojiMap } from "../../Data/EmojiMap";
-import ResponsiveAppBar from "../../Components/Navbar/ResponsiveNavBar";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContex";
 import MainLayout from "../../Layout/MainLayout";
+import { lanzarConfeti } from "../../Functions/Confeti.js";
 
 const CheckoutPage = () => {
   const location = useLocation();
@@ -13,32 +13,64 @@ const CheckoutPage = () => {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
 
+  const [metodoPago, setMetodoPago] = useState("");
+
+  const handleSeleccion = (metodo) => {
+    setMetodoPago(metodo);
+  };
+
   return (
-    <>
-      <MainLayout>
-        <div className={styles.containerCheckoutPage}>
-          <h2>Resumen de pago</h2>
-          <div className={styles.containerTotalPay}>
-            <p className={styles.totalPaytext}>Un total de pesos:&nbsp;</p>
-            <p className={styles.totalPayValue}> ${total.toLocaleString()}</p>
-          </div>
-          <div className={styles.containerTypesPay}>
-            <button>
-              <p className={styles.payCreditCard}>Tarjeta de credito</p>
-              {emojiMap.credit.emoji}
-            </button>
-            <button>
-              <p className={styles.payDebitCard}>Tarjeta de debito</p>
-              {emojiMap.credit.emoji}
-            </button>
-            <button>
-              <p className={styles.payCash}>Efectivo</p>
-              {emojiMap.bill.emoji}
-            </button>
-          </div>
+    <MainLayout>
+      <div className={styles.containerCheckoutPage}>
+        <h2>Resumen de pago</h2>
+
+        <div className={styles.containerTotalPay}>
+          <p className={styles.totalPaytext}>Un total de pesos:&nbsp;</p>
+          <p className={styles.totalPayValue}>
+            ${total.toLocaleString("es-AR", { minimumFractionDigits: 2 })}
+          </p>
         </div>
-      </MainLayout>
-    </>
+
+        <p>Seleccione el metodo de pago</p>
+
+        <div className={styles.containerTypesPay}>
+          <button onClick={() => handleSeleccion("Tarjeta de crédito")}>
+            <p className={styles.payCreditCard}>Tarjeta de crédito</p>
+            {emojiMap.credit.emoji}
+          </button>
+
+          <button onClick={() => handleSeleccion("Tarjeta de débito")}>
+            <p className={styles.payDebitCard}>Tarjeta de débito</p>
+            {emojiMap.credit.emoji}
+          </button>
+
+          <button onClick={() => handleSeleccion("Efectivo")}>
+            <p className={styles.payCash}>Efectivo</p>
+            {emojiMap.bill.emoji}
+          </button>
+        </div>
+
+        {/* ✅ Mostrar mensaje solo si se seleccionó un método */}
+        {metodoPago && (
+          <div className={styles.containerConfirmacion}>
+            <p>
+              Ud. va a pagar con <strong>{metodoPago}</strong> el monto de{" "}
+              <strong>
+                ${total.toLocaleString("es-AR", { minimumFractionDigits: 2 })}
+              </strong>
+            </p>
+            <button
+              onClick={() => {
+                lanzarConfeti();
+                addLog("Confeti lanzado 🎊", "success");
+              }}
+            >
+              Continue con el pago
+            </button>
+          </div>
+        )}
+      </div>
+    </MainLayout>
   );
 };
 
