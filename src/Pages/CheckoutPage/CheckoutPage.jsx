@@ -60,6 +60,7 @@ const CheckoutPage = () => {
               </strong>
             </p>
             <button
+              className={styles.buttonPay}
               onClick={() => {
                 lanzarConfeti();
                 addLog("Confeti lanzado 🎊", "success");
