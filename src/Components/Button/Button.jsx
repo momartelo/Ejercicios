@@ -18,7 +18,7 @@ const Button = ({
       onClick={onClick}
       style={style}
       disabled={loading}
-      {...props} // PASÁ el resto de props acá, incluyendo el title
+      {...props}
     >
       {loading ? (
         <span className={styles.spinner} />
