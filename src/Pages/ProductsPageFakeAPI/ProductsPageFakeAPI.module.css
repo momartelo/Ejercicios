@@ -1,12 +1,22 @@
 .containerProductsFakeAPI {
   display: flex;
   flex-direction: column;
-  padding: 6rem 1rem;
+  padding: 5rem 1rem;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-
   color: #333;
+}
+
+.filterContainer {
+  display: flex;
+  padding: 1rem 0;
+  min-width: 300px;
+}
+
+.formControl {
+  width: 100%;
+  margin-bottom: 1.5rem;
 }
 
 .containerUlProduct {

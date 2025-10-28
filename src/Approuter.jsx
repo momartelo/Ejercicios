@@ -8,6 +8,7 @@ import PrivateRoutes from "./Components/PrivateRoutes";
 import FaqPage from "./Pages/FAQPage/FAQPage";
 import ContactPage from "./Pages/ContactPage/ContactPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
+import HomePage from "./Pages/HomePage/HomePage";
 
 function Approuter() {
   return (
@@ -18,6 +19,7 @@ function Approuter() {
       <Route path="/FAQs" element={<FaqPage />} />
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/prueba" element={<HomePage />} />
 
       <Route element={<PrivateRoutes />}>
         <Route path="/checkout" element={<CheckoutPage />} />

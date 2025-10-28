@@ -19,10 +19,11 @@ import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Avatar from "@mui/material/Avatar";
 import Login from "../Login/Login";
+import { obtenerIniciales } from "../../Functions/Initials";
 
 const pages = [
-  { name: "Nosotros", path: "/team" },
   { name: "Preguntas Frecuentes", path: "/FAQs" },
+  { name: "Nosotros", path: "/team" },
   { name: "Contacto", path: "/contact" },
 ];
 
@@ -37,7 +38,7 @@ const ResponsiveNavBar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const { carrito } = useCart();
-  const { isLoggedIn, login, logout } = useAuth();
+  const { isLoggedIn, logout, user } = useAuth();
 
   const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
   const handleCloseNavMenu = () => setAnchorElNav(null);
@@ -118,7 +119,7 @@ const ResponsiveNavBar = () => {
             </Box>
 
             {/* --- Logo (Móvil) --- */}
-            <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+            {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
             <Typography
               variant="h5"
               noWrap
@@ -136,7 +137,7 @@ const ResponsiveNavBar = () => {
               }}
             >
               LOGO
-            </Typography>
+            </Typography> */}
 
             {/* --- Menú Principal (Desktop) --- */}
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
@@ -202,7 +203,7 @@ const ResponsiveNavBar = () => {
                       alt="User"
                       sx={{ bgcolor: "#1976d2", fontSize: "1rem" }}
                     >
-                      MM
+                      {obtenerIniciales(user.name)}
                     </Avatar>
                   </IconButton>
 

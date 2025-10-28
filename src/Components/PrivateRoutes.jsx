@@ -9,7 +9,13 @@ const PrivateRoutes = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      Swal.fire("Debe estar Logueado para acceder a esta pagina");
+      // Swal.fire("Debe estar Logueado para acceder a esta pagina");
+
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debe estar Logueado para acceder a esta pagina",
+      });
       navigate("/cart");
     }
   }, [isLoggedIn, navigate]);

@@ -1,5 +1,4 @@
 import styles from "./CardProyect.module.css";
-import React from "react";
 import Button from "../../Components/Button/Button";
 
 const CardProyect = ({ title, description, onShowAlert }) => {

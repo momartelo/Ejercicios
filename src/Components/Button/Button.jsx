@@ -9,7 +9,7 @@ const Button = ({
   style = {},
   icon = null,
   loading = false,
-  ...props // captura el resto de props
+  ...props
 }) => {
   return (
     <button

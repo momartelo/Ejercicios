@@ -16,21 +16,13 @@ const Login = ({ openLogin, onClose }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const { isLoggedIn, login, logout } = useAuth();
+  const { login } = useAuth();
 
   const handleCloseLogin = () => {
     setEmail("");
     setPassword("");
     setError("");
     onClose();
-  };
-
-  const handleOpenLogin = () => {
-    // cada vez que se abre el diálogo, limpiamos los datos anteriores
-    setEmail("");
-    setPassword("");
-    setError("");
-    setOpenLogin(true);
   };
 
   const { isBlocked, addAttempt, resetAttempts } = useLoginAttempts();

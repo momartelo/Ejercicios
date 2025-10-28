@@ -3,6 +3,7 @@ import { addUser, findUserByEmail } from "../../mocks/Users";
 import Swal from "sweetalert2";
 import styles from "./RegisterPage.module.css";
 import { useNavigate } from "react-router-dom";
+import MainLayout from "../../Layout/MainLayout";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -32,56 +33,45 @@ const RegisterPage = () => {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "80px auto", textAlign: "center" }}>
-      <h2>Registro de usuario</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Nombre"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          style={{
-            display: "block",
-            width: "100%",
-            marginBottom: 10,
-            padding: 8,
-          }}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Correo electrónico"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          style={{
-            display: "block",
-            width: "100%",
-            marginBottom: 10,
-            padding: 8,
-          }}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Contraseña"
-          value={formData.password}
-          onChange={handleChange}
-          required
-          style={{
-            display: "block",
-            width: "100%",
-            marginBottom: 10,
-            padding: 8,
-          }}
-        />
-        <button type="submit" style={{ padding: 10, width: "100%" }}>
-          Registrarse
-        </button>
-      </form>
-    </div>
+    <>
+      <MainLayout>
+        <div className={styles.containerRegisterPage}>
+          <h2>Registro de usuario</h2>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="name"
+              placeholder="Nombre"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className={styles.inputName}
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Correo electrónico"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className={styles.inputEmail}
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Contraseña"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className={styles.inputPassword}
+            />
+            <button className={styles.buttonSubmit} type="submit">
+              Registrarse
+            </button>
+          </form>
+        </div>
+      </MainLayout>
+    </>
   );
 };
 

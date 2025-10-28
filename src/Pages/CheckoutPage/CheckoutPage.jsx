@@ -63,7 +63,6 @@ const CheckoutPage = () => {
               className={styles.buttonPay}
               onClick={() => {
                 lanzarConfeti();
-                addLog("Confeti lanzado 🎊", "success");
               }}
             >
               Continue con el pago

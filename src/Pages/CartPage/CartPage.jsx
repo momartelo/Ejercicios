@@ -1,14 +1,13 @@
-import ResponsiveAppBar from "../../Components/Navbar/ResponsiveNavBar";
 import { useCart } from "../../Context/CartContext";
 import styles from "./CartPage.module.css";
 import { emojiMap } from "../../Data/EmojiMap";
 import Button from "../../Components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useAuth } from "../../Context/AuthContex";
 import MainLayout from "../../Layout/MainLayout";
 import {
   formatearPrecioParaMostrar,
+  limpiarYFormatearPrecio,
   normalizarPrecio,
 } from "../../Functions/PriceFormatter";
 
@@ -18,17 +17,9 @@ const CartPage = () => {
   const navigate = useNavigate();
   const [totalAcumulado, setTotalAcumulado] = useState(0);
 
-  // ✅ SIMPLE - La protección está en las rutas
   const handlePago = () => {
     navigate("/checkout", { state: { total: totalAcumulado } });
   };
-
-  // const formatearPrecioParaMostrar = (precio) => {
-  //   if (typeof precio === "number") {
-  //     return `$${precio.toLocaleString("es-AR")}`;
-  //   }
-  //   return precio;
-  // };
 
   useEffect(() => {
     const total = carrito.reduce((acumulado, producto) => {
@@ -86,8 +77,8 @@ const CartPage = () => {
                         </div>
                         <div className={styles.containerPrice}>
                           <p>
-                            Precio unitario: $
-                            {formatearPrecioParaMostrar(precioString)}
+                            Precio unitario:
+                            {limpiarYFormatearPrecio(precioString)}
                           </p>
                         </div>
                         <div className={styles.containerAmount}>
@@ -106,7 +97,7 @@ const CartPage = () => {
                           </button>
                         </div>
                         <div className={styles.containerTotal}>
-                          <p>Total: ${formatearPrecioParaMostrar(subtotal)}</p>
+                          <p>Total: {limpiarYFormatearPrecio(subtotal)}</p>
                         </div>
                       </li>
                     );
@@ -116,7 +107,7 @@ const CartPage = () => {
                   <h3>
                     Total a pagar:{" "}
                     <span style={{ color: "green" }}>
-                      ${formatearPrecioParaMostrar(totalAcumulado)}
+                      {limpiarYFormatearPrecio(totalAcumulado)}
                     </span>
                   </h3>
                 </div>
