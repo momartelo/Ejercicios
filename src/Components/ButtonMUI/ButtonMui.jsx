@@ -5,14 +5,14 @@ import { Button, CircularProgress } from "@mui/material";
 const ButtonMui = ({
   text,
   onClick,
-  variant = "contained", // contained, outlined, text
-  color = "primary", // primary, secondary, success, error...
+  variant = "contained",
+  color = "primary",
   startIcon = null,
   endIcon = null,
   loading = false,
   disabled = false,
   fullWidth = false,
-  sx = {}, // estilos inline con MUI
+  sx = {},
   ...props
 }) => {
   return (
