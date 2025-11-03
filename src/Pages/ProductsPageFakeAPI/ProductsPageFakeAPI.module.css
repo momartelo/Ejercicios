@@ -1,17 +1,23 @@
 .containerProductsFakeAPI {
-  display: flex;
-  flex-direction: column;
-  padding: 5rem 1rem;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  color: #333;
+  position: relative;
+  margin-top: -100px; /* 🔥 levanta el contenedor sobre el carrusel */
+  z-index: 10; /* asegura que quede arriba del carrusel */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* sombra suave */
 }
 
 .filterContainer {
   display: flex;
-  padding: 1rem 0;
-  min-width: 300px;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+  width: 350px;
 }
 
 .formControl {
@@ -20,12 +26,12 @@
 }
 
 .containerUlProduct {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1.5rem;
-  justify-content: center;
-  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .containerCard {
@@ -41,7 +47,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   text-align: center;
-  row-gap: 0.5rem;
 }
 .containerCard:hover {
   transform: translateY(-5px);
@@ -52,7 +57,7 @@
   font-family: Arial;
   font-size: 0.9rem;
   font-weight: 600;
-  min-height: 3.75rem;
+  /* min-height: 3.75rem; */
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -60,6 +65,7 @@
   -webkit-line-clamp: 2; /* Chrome, Safari, Edge */
   line-clamp: 2; /* estándar futura */
   -webkit-box-orient: vertical;
+  margin: 0;
 }
 
 .price {

@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import Card from "../../Components/Card/Card";
 import { useCart } from "../../Context/CartContext";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { categoryTranslations } from "../../Data/Categories";
+import Carousel from "../../Components/Carousel/Carousel";
 
 const ProductsPageFakeAPI = () => {
   const [productos, setProductos] = useState([]);
@@ -45,6 +47,7 @@ const ProductsPageFakeAPI = () => {
   return (
     <>
       <MainLayout>
+        <Carousel />
         <div className={styles.containerProductsFakeAPI}>
           {isLoading && <p>Cargando productos...</p>}
           {error && <p>Error: {error}</p>}
@@ -64,7 +67,7 @@ const ProductsPageFakeAPI = () => {
               >
                 {categorias.map((cat) => (
                   <MenuItem key={cat} value={cat}>
-                    {cat}
+                    {categoryTranslations[cat] || cat}
                   </MenuItem>
                 ))}
               </Select>

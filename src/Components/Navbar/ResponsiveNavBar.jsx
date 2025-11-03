@@ -59,8 +59,12 @@ const ResponsiveNavBar = () => {
   return (
     <>
       <AppBar
-        position="fixed"
-        sx={{ background: "linear-gradient(90deg,#0f172a,#1f2937)" }}
+        position="relative"
+        sx={{
+          background: "linear-gradient(90deg, #ffffff, #f8f8f8)",
+          color: "#111827",
+          boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
+        }}
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
@@ -73,8 +77,8 @@ const ResponsiveNavBar = () => {
                 sx={{
                   display: { xs: "none", md: "flex" },
                   mr: 1,
-                  color: "white",
-                  "&:hover": { color: "#d9d9d9" },
+                  color: "#333",
+                  "&:hover": { color: "#c9a227" },
                 }}
               >
                 <HomeIcon sx={{ fontSize: 40 }} />
@@ -153,8 +157,8 @@ const ResponsiveNavBar = () => {
                     display: "block",
                     textTransform: "none",
                     fontSize: "1rem",
-                    color: "white",
-                    "&:hover": { color: "#d9d9d9" },
+                    color: "#333",
+                    "&:hover": { color: "#c9a227" },
                   }}
                 >
                   {page.name}
@@ -175,7 +179,7 @@ const ResponsiveNavBar = () => {
                 component={Link}
                 to="/cart"
                 aria-label="Carrito"
-                sx={{ color: "white" }}
+                sx={{ color: "#333", "&:hover": { color: "#c9a227" } }}
               >
                 <Badge
                   badgeContent={carrito.reduce(
@@ -201,7 +205,7 @@ const ResponsiveNavBar = () => {
                   >
                     <Avatar
                       alt="User"
-                      sx={{ bgcolor: "#1976d2", fontSize: "1rem" }}
+                      sx={{ bgcolor: "#c9a227", fontSize: "1rem" }}
                     >
                       {obtenerIniciales(user.name)}
                     </Avatar>
@@ -240,11 +244,11 @@ const ResponsiveNavBar = () => {
                       onClick={handleOpenLogin}
                       sx={{
                         my: 2,
-                        color: "white",
-                        backgroundColor: "#1976d2",
+                        color: "#333",
+
                         textTransform: "none",
                         fontSize: "1.1rem",
-                        "&:hover": { color: "#d9d9d9" },
+                        "&:hover": { color: "#c9a227" },
                       }}
                     >
                       Loguearse

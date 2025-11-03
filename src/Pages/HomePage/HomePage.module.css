@@ -7,7 +7,6 @@
 .containerHome {
   display: flex;
   flex-direction: column;
-  padding-top: 6rem;
   align-items: center;
   width: 100%;
   color: #333;

@@ -106,9 +106,7 @@ const CartPage = () => {
                 <div className={styles.totalResumen}>
                   <h3>
                     Total a pagar:{" "}
-                    <span style={{ color: "green" }}>
-                      {limpiarYFormatearPrecio(totalAcumulado)}
-                    </span>
+                    <span> {limpiarYFormatearPrecio(totalAcumulado)}</span>
                   </h3>
                 </div>
               </div>

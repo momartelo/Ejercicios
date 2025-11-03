@@ -1,7 +1,6 @@
 .containerProductsAPI {
   display: flex;
   flex-direction: column;
-  padding: 6rem 0;
   justify-content: flex-start;
   align-items: center;
   width: 100%;

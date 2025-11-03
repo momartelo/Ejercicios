@@ -1,3 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600&display=swap");
+
+h1,
+h2,
+h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+
+body,
+p {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  color: #333;
+}
 #root {
   margin: 0;
   padding: 0;
@@ -7,6 +22,6 @@
   align-items: center;
   min-width: 320px;
   width: 100%;
-  font-family: "Inter", sans-serif;
+
   box-sizing: border-box;
 }

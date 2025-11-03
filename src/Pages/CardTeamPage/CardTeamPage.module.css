@@ -4,8 +4,7 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-
-  padding: 6rem 1rem;
+  margin-top: 20px;
   color: #333;
 }
 
@@ -15,7 +14,6 @@
   flex-wrap: wrap;
   gap: 1.5rem;
   justify-content: center;
-  margin-top: 20px;
 }
 
 .cardMiembro {
