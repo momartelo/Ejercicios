@@ -1,22 +1,27 @@
 import styles from "./CheckoutPage.module.css";
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState } from "react";
 import { emojiMap } from "../../Data/EmojiMap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContex";
 import MainLayout from "../../Layout/MainLayout";
 import { lanzarConfeti } from "../../Functions/Confeti.js";
+import { useCart } from "../../Context/CartContext"; // 👈 Importá tu contexto de carrito
 
 const CheckoutPage = () => {
-  const location = useLocation();
-  const total = location.state?.total || 0;
+  const { getTotal, limpiarCarrito } = useCart();
+  const total = getTotal();
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
-
   const [metodoPago, setMetodoPago] = useState("");
 
   const handleSeleccion = (metodo) => {
     setMetodoPago(metodo);
+  };
+
+  const handlePagar = () => {
+    lanzarConfeti();
+    // limpiarCarrito();
+    // setTimeout(() => navigate("/"), 3000);
   };
 
   return (
@@ -31,7 +36,7 @@ const CheckoutPage = () => {
           </p>
         </div>
 
-        <p>Seleccione el metodo de pago</p>
+        <p>Seleccione el método de pago</p>
 
         <div className={styles.containerTypesPay}>
           <button onClick={() => handleSeleccion("Tarjeta de crédito")}>
@@ -50,7 +55,6 @@ const CheckoutPage = () => {
           </button>
         </div>
 
-        {/* ✅ Mostrar mensaje solo si se seleccionó un método */}
         {metodoPago && (
           <div className={styles.containerConfirmacion}>
             <p>
@@ -59,12 +63,7 @@ const CheckoutPage = () => {
                 ${total.toLocaleString("es-AR", { minimumFractionDigits: 2 })}
               </strong>
             </p>
-            <button
-              className={styles.buttonPay}
-              onClick={() => {
-                lanzarConfeti();
-              }}
-            >
+            <button className={styles.buttonPay} onClick={handlePagar}>
               Continue con el pago
             </button>
           </div>
@@ -75,9 +74,3 @@ const CheckoutPage = () => {
 };
 
 export default CheckoutPage;
-
-// useEffect(() => {
-//   if (!isLoggedIn) {
-//     navigate("/"); // O podés redirigir a "/login"
-//   }
-// }, [isLoggedIn, navigate]);

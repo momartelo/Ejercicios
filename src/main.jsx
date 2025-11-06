@@ -6,14 +6,17 @@ import "./index.css";
 import { CartProvider } from "./Context/CartContext";
 import { AuthProvider } from "./Context/AuthContex";
 import { AlertProvider } from "./Context/AlertContext";
+import { CategoryProvider } from "./Context/CategoryContex";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <AlertProvider>
       <AuthProvider>
         <CartProvider>
-          <ScrollToTop />
-          <Approuter />
+          <CategoryProvider>
+            <ScrollToTop />
+            <Approuter />
+          </CategoryProvider>
         </CartProvider>
       </AuthProvider>
     </AlertProvider>

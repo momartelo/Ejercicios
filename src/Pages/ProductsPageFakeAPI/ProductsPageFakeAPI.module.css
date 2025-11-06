@@ -1,16 +1,18 @@
 .containerProductsFakeAPI {
   position: relative;
-  margin-top: -100px; /* 🔥 levanta el contenedor sobre el carrusel */
+  margin-top: -150px; /* 🔥 levanta el contenedor sobre el carrusel */
   z-index: 10; /* asegura que quede arriba del carrusel */
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(6px);
-  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  /* border-radius: 16px; */
   padding: 2rem;
-  width: 90%;
-  max-width: 1200px;
+  width: 100%;
+  /* max-width: 1200px; */
   margin-left: auto;
   margin-right: auto;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* sombra suave */
+  /* box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);  */
+  display: flex;
+  flex-direction: column;
 }
 
 .filterContainer {
@@ -32,6 +34,11 @@
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.containerComponentCard {
+  display: flex;
+  justify-content: center;
 }
 
 .containerCard {

@@ -6,19 +6,26 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import MainLayout from "../../Layout/MainLayout";
 import {
-  formatearPrecioParaMostrar,
   limpiarYFormatearPrecio,
   normalizarPrecio,
 } from "../../Functions/PriceFormatter";
+import { useCategory } from "../../Context/CategoryContex";
 
 const CartPage = () => {
   const { carrito, limpiarCarrito, incrementarCantidad, decrementarCantidad } =
     useCart();
   const navigate = useNavigate();
   const [totalAcumulado, setTotalAcumulado] = useState(0);
+  const { setCategory } = useCategory();
 
   const handlePago = () => {
+    localStorage.setItem("checkoutTotal", totalAcumulado);
     navigate("/checkout", { state: { total: totalAcumulado } });
+  };
+
+  const handleLogoClick = () => {
+    setCategory("Todas"); // reset del filtro
+    navigate("/"); // navegar al inicio después
   };
 
   useEffect(() => {
@@ -119,7 +126,7 @@ const CartPage = () => {
                 </button>
                 <button
                   className={styles.buttonBuyMore}
-                  onClick={() => navigate("/")}
+                  onClick={() => handleLogoClick()}
                 >
                   Seguir Comprando
                 </button>

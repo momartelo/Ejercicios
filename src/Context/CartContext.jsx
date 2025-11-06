@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from "react";
-import { normalizarPrecio } from "../Functions/PriceFormatter"; // Importar la función
+import { createContext, useContext, useState, useEffect } from "react";
+import { normalizarPrecio } from "../Functions/PriceFormatter";
 
 const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
@@ -12,6 +12,28 @@ const getProductName = (producto) =>
 
 export const CartProvider = ({ children }) => {
   const [carrito, setCarrito] = useState([]);
+
+  // 🧮 Calcular total del carrito
+  const getTotal = () => {
+    return carrito.reduce((acumulado, producto) => {
+      const precio =
+        producto.precioNormalizado ??
+        normalizarPrecio(producto.precio ?? producto.price ?? "0");
+      return acumulado + precio * (producto.cantidad || 1);
+    }, 0);
+  };
+
+  // 💾 Persistir carrito en localStorage
+  useEffect(() => {
+    const carritoGuardado = localStorage.getItem("carrito");
+    if (carritoGuardado) {
+      setCarrito(JSON.parse(carritoGuardado));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+  }, [carrito]);
 
   const agregarAlCarrito = (producto) => {
     setCarrito((prevCarrito) => {
@@ -27,7 +49,6 @@ export const CartProvider = ({ children }) => {
             : item
         );
       } else {
-        // Normalizar el precio al agregar al carrito
         const precioString = producto.precio ?? producto.price ?? "0";
         const precioNormalizado = normalizarPrecio(precioString);
 
@@ -36,13 +57,13 @@ export const CartProvider = ({ children }) => {
           {
             ...producto,
             cantidad: 1,
-            precioNormalizado, // Guardar el precio normalizado
+            precioNormalizado,
           },
         ];
       }
     });
 
-    console.log("Producto agregado al carrito", getProductName(producto));
+    console.log("Producto agregado al carrito:", getProductName(producto));
   };
 
   const incrementarCantidad = (index) => {
@@ -63,7 +84,10 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  const limpiarCarrito = () => setCarrito([]);
+  const limpiarCarrito = () => {
+    setCarrito([]);
+    localStorage.removeItem("carrito");
+  };
 
   return (
     <CartContext.Provider
@@ -73,6 +97,7 @@ export const CartProvider = ({ children }) => {
         limpiarCarrito,
         incrementarCantidad,
         decrementarCantidad,
+        getTotal, // 👈 Nuevo: accesible desde cualquier parte
       }}
     >
       {children}

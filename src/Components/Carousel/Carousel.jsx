@@ -8,9 +8,11 @@ import styles from "./Carousel.module.css";
 
 const Carousel = () => {
   const images = [
-    "/wallpapers/banner1.webp",
-    "/wallpapers/banner2.webp",
-    "/wallpapers/banner3.webp",
+    "../../../public/img/Carousel/CarouselOK1.png",
+    "../../../public/img/Carousel/CarouselOK2.png",
+    "../../../public/img/Carousel/CarouselOK3.png",
+    "../../../public/img/Carousel/CarouselOK4.png",
+    "../../../public/img/Carousel/CarouselOK5.png",
   ];
 
   return (
