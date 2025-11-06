@@ -4,8 +4,6 @@ import { getProductsFakeAPI } from "../../Functions/FetchAPI";
 import { useEffect, useState } from "react";
 import Card from "../../Components/Card/Card";
 import { useCart } from "../../Context/CartContext";
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
-import { categoryTranslations } from "../../Data/Categories";
 import Carousel from "../../Components/Carousel/Carousel";
 import { useCategory } from "../../Context/CategoryContex";
 
@@ -43,8 +41,6 @@ const ProductsPageFakeAPI = () => {
     }
   }, [category, productos]);
 
-  // const categorias = ["Todas", ...new Set(productos.map((p) => p.category))];
-
   return (
     <>
       <MainLayout categorias={categorias}>
@@ -52,28 +48,6 @@ const ProductsPageFakeAPI = () => {
         <div className={styles.containerProductsFakeAPI}>
           {isLoading && <p>Cargando productos...</p>}
           {error && <p>Error: {error}</p>}
-          {/* <div className={styles.filterContainer}>
-            <FormControl
-              variant="outlined"
-              className={styles.formControl}
-              size="small"
-            >
-              <InputLabel id="category-select-label">Categoría</InputLabel>
-              <Select
-                labelId="category-select-label"
-                id="category-select"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                label="Categoría"
-              >
-                {categorias.map((cat) => (
-                  <MenuItem key={cat} value={cat}>
-                    {categoryTranslations[cat] || cat}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div> */}
 
           <ul className={styles.containerUlProduct}>
             {filteredProducts.length > 0 ? (

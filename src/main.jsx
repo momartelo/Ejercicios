@@ -7,6 +7,8 @@ import { CartProvider } from "./Context/CartContext";
 import { AuthProvider } from "./Context/AuthContex";
 import { AlertProvider } from "./Context/AlertContext";
 import { CategoryProvider } from "./Context/CategoryContex";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -16,6 +18,17 @@ createRoot(document.getElementById("root")).render(
           <CategoryProvider>
             <ScrollToTop />
             <Approuter />
+            <ToastContainer
+              position="bottom-right"
+              autoClose={2000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              pauseOnHover
+              draggable
+              theme="colored"
+              toastStyle={{ fontSize: "0.8rem" }}
+            />
           </CategoryProvider>
         </CartProvider>
       </AuthProvider>

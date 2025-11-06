@@ -47,7 +47,7 @@ const ContactPage = () => {
 
       // -------------------------------------------------
 
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 500));
       setEnviado(true);
       setFormData({
         nombre: "",

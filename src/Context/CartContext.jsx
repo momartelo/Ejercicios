@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { normalizarPrecio } from "../Functions/PriceFormatter";
+import { toast } from "react-toastify";
 
 const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
@@ -43,12 +44,14 @@ export const CartProvider = ({ children }) => {
       );
 
       if (productoExistente) {
+        toast.info(`${getProductName(producto)} (cantidad aumentada)`);
         return prevCarrito.map((item) =>
           getProductId(item) === productoId
             ? { ...item, cantidad: item.cantidad + 1 }
             : item
         );
       } else {
+        toast.success(`${getProductName(producto)} agregado correctamente`);
         const precioString = producto.precio ?? producto.price ?? "0";
         const precioNormalizado = normalizarPrecio(precioString);
 

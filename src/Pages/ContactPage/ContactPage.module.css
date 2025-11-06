@@ -53,6 +53,7 @@
 .containerTextsForm > p:nth-child(5),
 .containerTextsForm > p:nth-child(6) {
   padding-top: 1rem;
+  margin-bottom: 0;
 }
 
 .containerTextsForm > p:nth-child(7) {

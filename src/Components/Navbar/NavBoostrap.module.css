@@ -10,12 +10,59 @@
 
 .cartBadge {
   position: absolute !important;
-  top: 15px;
+  top: 5px;
   left: 65%; /* lo mueve un poco a la izquierda */
   transform: translate(-30%, -30%);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
-.iconCart {
-  font-size: 1.8rem;
+.shoppingIcon {
+  font-size: 1.75rem !important;
+}
+
+.navLink,
+.dropdownToggle {
+  color: #333 !important;
+  transition: color 0.3s ease;
+  margin-right: 10px;
+}
+
+.navLink:hover,
+.dropdownToggle:hover {
+  color: #f5cf52 !important;
+}
+
+/* 🔸 Color base */
+.dropdownItem {
+  color: #333 !important;
+  background-color: transparent !important;
+  transition: color 0.3s ease;
+}
+
+/* 🔸 Hover */
+.dropdownItem:hover {
+  color: #f5cf52 !important;
+  background-color: transparent !important;
+}
+
+/* 🔸 Focus / Active (evita fondo azul) */
+.dropdownItem:focus,
+.dropdownItem:focus-visible,
+.dropdownItem:active {
+  background-color: transparent !important;
+  color: #333 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 🔸 Si quieres resaltar la categoría seleccionada */
+.dropdownItem.active {
+  color: #f5cf52 !important;
+  background-color: transparent !important;
+}
+
+.userDropdown .dropdown-menu {
+  right: 0 !important;
+  left: auto !important;
+  transform: translateX(-10px); /* opcional, ajusta la posición */
 }

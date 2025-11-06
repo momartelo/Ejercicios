@@ -12,6 +12,7 @@ import { useAuth } from "../../Context/AuthContex";
 import { categoryTranslations } from "../../Data/Categories";
 import styles from "./NavBoostrap.module.css";
 import Login from "../Login/Login";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 function BootstrapNavBar() {
   const { categorias, category, setCategory, isLoading } = useCategory();
@@ -54,7 +55,11 @@ function BootstrapNavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <NavDropdown title="Categorías" id="categories-dropdown">
+            <NavDropdown
+              title="Categorías"
+              id="categories-dropdown"
+              className={styles.dropdownToggle}
+            >
               {isLoading ? (
                 <NavDropdown.Item disabled>Cargando...</NavDropdown.Item>
               ) : (
@@ -66,6 +71,7 @@ function BootstrapNavBar() {
                       setCategory(cat);
                       navigate("/");
                     }}
+                    className={styles.dropdownItem}
                   >
                     {categoryTranslations[cat] || cat}
                   </NavDropdown.Item>
@@ -73,36 +79,44 @@ function BootstrapNavBar() {
               )}
             </NavDropdown>
 
-            <Nav.Link as={Link} to="/FAQs">
+            <Nav.Link as={Link} to="/FAQs" className={styles.navLink}>
               Preguntas Frecuentes
             </Nav.Link>
-            <Nav.Link as={Link} to="/team">
+            <Nav.Link as={Link} to="/team" className={styles.navLink}>
               Nosotros
             </Nav.Link>
-            <Nav.Link as={Link} to="/contact">
+            <Nav.Link as={Link} to="/contact" className={styles.navLink}>
               Contacto
             </Nav.Link>
           </Nav>
 
           <Nav className="ms-auto align-items-center">
             <Nav.Link as={Link} to="/cart" className={styles.cartLink}>
-              <span className={styles.iconCart}>🛒</span>{" "}
               {totalItems > 0 && (
-                <Badge bg="danger" pill className={styles.cartBadge}>
-                  {totalItems}
-                </Badge>
+                <>
+                  <ShoppingCartIcon className={styles.shoppingIcon} />
+                  <Badge bg="danger" pill className={styles.cartBadge}>
+                    {totalItems}
+                  </Badge>
+                </>
               )}
             </Nav.Link>
-
             {isLoggedIn ? (
               <NavDropdown
                 title={obtenerIniciales(user.name)}
                 id="user-dropdown"
                 show={showUserDropdown}
-                onMouseEnter={() => setShowUserDropdown(true)}
-                onMouseLeave={() => setShowUserDropdown(false)}
+                onClick={() => setShowUserDropdown(!showUserDropdown)}
+                align="end"
               >
-                <NavDropdown.Item onClick={logout}>
+                <NavDropdown.Item onClick={() => navigate("/perfil")}>
+                  Perfil
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => navigate("/cuenta")}>
+                  Cuenta
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={logout} className={styles.logout}>
                   Cerrar sesión
                 </NavDropdown.Item>
               </NavDropdown>
