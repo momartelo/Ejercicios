@@ -9,7 +9,6 @@ import Button from "react-bootstrap/Button";
 import { useCategory } from "../../Context/CategoryContex";
 import { useCart } from "../../Context/CartContext";
 import { useAuth } from "../../Context/AuthContex";
-import { categoryTranslations } from "../../Data/Categories";
 import styles from "./NavBoostrap.module.css";
 import Login from "../Login/Login";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -17,7 +16,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 function BootstrapNavBar() {
   const { categorias, category, setCategory, isLoading } = useCategory();
   const { carrito } = useCart();
-  const { isLoggedIn, user, logout, login } = useAuth();
+  const { isLoggedIn, user, logout, login, isAdminIn } = useAuth();
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
@@ -26,6 +25,7 @@ function BootstrapNavBar() {
   };
 
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [showEditDropdown, setShowEditDropdown] = useState(false);
 
   const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
 
@@ -73,7 +73,7 @@ function BootstrapNavBar() {
                     }}
                     className={styles.dropdownItem}
                   >
-                    {categoryTranslations[cat] || cat}
+                    {cat}
                   </NavDropdown.Item>
                 ))
               )}
@@ -88,17 +88,29 @@ function BootstrapNavBar() {
             <Nav.Link as={Link} to="/contact" className={styles.navLink}>
               Contacto
             </Nav.Link>
+            {isLoggedIn && isAdminIn && (
+              <NavDropdown
+                title="Admin"
+                id="edit-dropdown"
+                show={showEditDropdown}
+                onClick={() => setShowEditDropdown(!showEditDropdown)}
+                align="end"
+              >
+                <NavDropdown.Item onClick={() => navigate("/product/new")}>
+                  Agregar Producto
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
           </Nav>
 
           <Nav className="ms-auto align-items-center">
             <Nav.Link as={Link} to="/cart" className={styles.cartLink}>
+              <ShoppingCartIcon className={styles.shoppingIcon} />
+
               {totalItems > 0 && (
-                <>
-                  <ShoppingCartIcon className={styles.shoppingIcon} />
-                  <Badge bg="danger" pill className={styles.cartBadge}>
-                    {totalItems}
-                  </Badge>
-                </>
+                <Badge bg="danger" pill className={styles.cartBadge}>
+                  {totalItems}
+                </Badge>
               )}
             </Nav.Link>
             {isLoggedIn ? (

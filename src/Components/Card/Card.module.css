@@ -85,3 +85,36 @@
 .buttonFavorite:focus {
   outline: none;
 }
+
+.adminButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.editButton {
+  background-color: #4caf50;
+  border: none;
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+}
+
+.deleteButton {
+  background-color: #f44336;
+  border: none;
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+}
+
+.editButton:hover {
+  background-color: #45a049;
+}
+
+.deleteButton:hover {
+  background-color: #e53935;
+}

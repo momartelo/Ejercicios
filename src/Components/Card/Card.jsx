@@ -5,6 +5,8 @@ import { limpiarYFormatearPrecio } from "../../Functions/PriceFormatter";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import styles from "./Card.module.css";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Card = ({
   title,
@@ -14,6 +16,8 @@ const Card = ({
   image,
   rating,
   onAddToCart,
+  onEdit,
+  onDelete,
   className,
   titleClass,
   descriptionClass,
@@ -23,6 +27,7 @@ const Card = ({
   imageClass,
   ratingClass,
   style,
+  isAdmin,
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -51,6 +56,16 @@ const Card = ({
         <RatingStars value={rating} showValue={true} />
       </div>
       <p className={priceClass}>{limpiarYFormatearPrecio(price)}</p>
+      {isAdmin && (
+        <div className={styles.adminButtons}>
+          <button className={styles.editButton} onClick={onEdit}>
+            <EditIcon />
+          </button>
+          <button className={styles.deleteButton} onClick={onDelete}>
+            <DeleteIcon />
+          </button>
+        </div>
+      )}
       <Button text="Agregar" onClick={onAddToCart} className={buttonClass} />
     </div>
   );

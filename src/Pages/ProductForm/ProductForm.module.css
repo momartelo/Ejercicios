@@ -1,0 +1,85 @@
+.container {
+  max-width: 600px;
+  margin: 30px auto;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.label {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.input,
+.textarea {
+  padding: 10px 12px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border: 1px solid #007bff;
+  box-shadow: 0 0 4px rgba(25, 22, 206, 0.637);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.containerButtons {
+  display: flex;
+  column-gap: 1rem;
+}
+
+.button {
+  width: 70%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.button:hover {
+  background-color: #105bd5;
+}
+
+.buttonBack {
+  width: 30%;
+  padding: 12px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.buttonBack:hover {
+  background-color: #da190b;
+}

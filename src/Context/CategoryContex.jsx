@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getProductsFakeAPI } from "../Functions/FetchAPI";
+import { getLocalProducts } from "../Functions/ProductsLocalAPI";
 
 const CategoryContext = createContext();
 
@@ -10,15 +10,18 @@ export const CategoryProvider = ({ children }) => {
   const [category, setCategory] = useState("Todas");
   const [isLoading, setIsLoading] = useState(true);
 
+  // 🔄 Función reutilizable para cargar categorías
+  const loadCategorias = async () => {
+    const data = await getLocalProducts();
+    const categoriasUnicas = ["Todas", ...new Set(data.map((p) => p.category))];
+    setCategorias(categoriasUnicas);
+  };
+
+  // 🔄 Se llama solo al iniciar la app
   useEffect(() => {
-    const fetchCategorias = async () => {
+    const init = async () => {
       try {
-        const data = await getProductsFakeAPI();
-        const categoriasUnicas = [
-          "Todas",
-          ...new Set(data.map((p) => p.category)),
-        ];
-        setCategorias(categoriasUnicas);
+        await loadCategorias();
       } catch (error) {
         console.error("Error cargando categorías:", error);
       } finally {
@@ -26,12 +29,27 @@ export const CategoryProvider = ({ children }) => {
       }
     };
 
-    fetchCategorias();
+    init();
   }, []);
+
+  // 🔄 Se expone esta función para refrescar al editar/agregar productos
+  const refreshCategorias = async () => {
+    try {
+      await loadCategorias();
+    } catch (error) {
+      console.error("Error refrescando categorías:", error);
+    }
+  };
 
   return (
     <CategoryContext.Provider
-      value={{ categorias, category, setCategory, isLoading }}
+      value={{
+        categorias,
+        category,
+        setCategory,
+        isLoading,
+        refreshCategorias,
+      }}
     >
       {children}
     </CategoryContext.Provider>

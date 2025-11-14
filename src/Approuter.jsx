@@ -3,17 +3,18 @@ import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
 import CardTeamPage from "./Pages/CardTeamPage/CardTeamPage";
 import CartPage from "./Pages/CartPage/CartPage";
 import CheckoutPage from "./Pages/CheckoutPage/CheckoutPage";
-import ProductsPageFakeAPI from "./Pages/ProductsPageFakeAPI/ProductsPageFakeAPI";
 import PrivateRoutes from "./Components/PrivateRoutes";
 import FaqPage from "./Pages/FAQPage/FAQPage";
 import ContactPage from "./Pages/ContactPage/ContactPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import HomePage from "./Pages/HomePage/HomePage";
+import ProductForm from "./Pages/ProductForm/ProductForm";
+import ProductsPageLocal from "./Pages/ProductsPageLocal/ProductsPageLocal";
 
 function Approuter() {
   return (
     <Routes>
-      <Route path="/" element={<ProductsPageFakeAPI />} />
+      <Route path="/" element={<ProductsPageLocal />} />
       <Route path="/team" element={<CardTeamPage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/FAQs" element={<FaqPage />} />
@@ -23,6 +24,9 @@ function Approuter() {
 
       <Route element={<PrivateRoutes />}>
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/product/new" element={<ProductForm />} />
+        <Route path="/product/edit/:id" element={<ProductForm />} />
+        Admin Routes
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />

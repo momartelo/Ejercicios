@@ -1,0 +1,137 @@
+.containerProducts {
+  position: relative;
+  margin-top: -100px; /* 🔥 levanta el contenedor sobre el carrusel */
+  z-index: 10; /* asegura que quede arriba del carrusel */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  /* border-radius: 16px; */
+  padding: 1rem;
+  width: 100%;
+  /* max-width: 1200px; */
+  margin-left: auto;
+  margin-right: auto;
+  /* box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);  */
+  display: flex;
+  flex-direction: column;
+}
+
+.filterContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+  width: 350px;
+}
+
+.formControl {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.containerUlProduct {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 auto; /* centra el grid en su contenedor */
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.containerComponentCard {
+  display: flex;
+  justify-content: center;
+}
+
+.containerCard {
+  background: #fff;
+  border-radius: 12px;
+  width: 250px;
+  min-height: 250px; /* un poco más alta para ver bien la diferencia */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* reparte espacio */
+  align-items: center;
+  padding: 15px 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+.containerCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.title {
+  font-family: Arial;
+  font-size: 0.9rem;
+  font-weight: 500;
+  /* min-height: 3.75rem; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  display: box; /* opcional, para compatibilidad futura */
+  -webkit-line-clamp: 2; /* Chrome, Safari, Edge */
+  line-clamp: 2; /* estándar futura */
+  -webkit-box-orient: vertical;
+  margin: 20px 0 0 0;
+}
+
+.price {
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-top: 10px;
+}
+
+.buttonAdd {
+  padding: 10px;
+  width: 80%;
+  margin: 5px 0;
+  background-color: #b8860b;
+  color: #f5f5f5;
+  border-radius: 5px;
+  font-weight: 400;
+  border: none;
+  display: flex;
+  justify-content: center;
+}
+
+.buttonAdd:hover {
+  background-color: #ffd700;
+  color: #333;
+}
+.buttonAdd:focus {
+  outline: none;
+}
+
+.imageClass {
+  width: 50%;
+  height: 100px;
+  object-fit: contain;
+}
+
+.rating {
+  margin-bottom: 10px;
+}
+
+.containerAddProduct {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+}
+
+.buttonAddProduct {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.buttonAddProduct:hover {
+  background-color: #218838;
+}
