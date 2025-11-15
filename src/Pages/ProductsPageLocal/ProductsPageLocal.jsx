@@ -12,6 +12,7 @@ import { useCategory } from "../../Context/CategoryContex";
 import { useAuth } from "../../Context/AuthContex";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import ProductModal from "../../Components/ProductModal/ProductModal";
 
 const ProductsPageLocal = () => {
   const [productos, setProductos] = useState([]);
@@ -21,6 +22,7 @@ const ProductsPageLocal = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const { category, categorias } = useCategory();
   const { isAdminIn } = useAuth();
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -87,6 +89,16 @@ const ProductsPageLocal = () => {
 
   return (
     <>
+      {selectedProduct && (
+        <ProductModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+          onAddToCart={agregarAlCarrito}
+          isAdmin={isAdminIn}
+          onEdit={() => navigate(`/product/edit/${selectedProduct.id}`)}
+          onDelete={() => handleDelete(selectedProduct.id)}
+        />
+      )}
       <MainLayout categorias={categorias}>
         <Carousel />
         <div className={styles.containerProducts}>
@@ -109,6 +121,7 @@ const ProductsPageLocal = () => {
                     isAdmin={isAdminIn}
                     onEdit={() => navigate(`/product/edit/${producto.id}`)}
                     onDelete={() => handleDelete(producto.id)}
+                    onViewMore={() => setSelectedProduct(producto)}
                     className={styles.containerCard}
                     titleClass={styles.title}
                     priceClass={styles.price}

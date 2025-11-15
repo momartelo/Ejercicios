@@ -118,3 +118,16 @@
 .deleteButton:hover {
   background-color: #e53935;
 }
+.viewMore {
+  background: none;
+  border: none;
+  color: #0077ff;
+  font-size: 14px;
+  margin-top: 8px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.viewMore:hover {
+  text-decoration: underline;
+}

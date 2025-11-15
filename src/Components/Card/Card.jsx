@@ -28,6 +28,7 @@ const Card = ({
   ratingClass,
   style,
   isAdmin,
+  onViewMore,
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -56,6 +57,9 @@ const Card = ({
         <RatingStars value={rating} showValue={true} />
       </div>
       <p className={priceClass}>{limpiarYFormatearPrecio(price)}</p>
+      <button onClick={onViewMore} className={styles.viewMore}>
+        Ver más
+      </button>
       {isAdmin && (
         <div className={styles.adminButtons}>
           <button className={styles.editButton} onClick={onEdit}>
