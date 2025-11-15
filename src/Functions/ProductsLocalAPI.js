@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const localApiUrl = import.meta.env.VITE_LOCAL_API_URL;
+const localApiUrl = import.meta.env.VITE_BACK_API_URL;
 
 // GET: obtener todos los productos
 export const getLocalProducts = async () => {
