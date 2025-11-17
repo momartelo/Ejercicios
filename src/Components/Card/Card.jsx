@@ -9,6 +9,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const Card = ({
+  id,
   title,
   description,
   details,
@@ -35,6 +36,13 @@ const Card = ({
   const toggleFavorite = () => {
     setIsFavorite((prev) => !prev);
   };
+
+  const setFavorite = () => {
+    if (isFavorite) {
+      setFavoritos(id, users.id);
+    }
+  };
+
   return (
     <div className={className} style={style}>
       <div className={styles.containerFavorite}>

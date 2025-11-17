@@ -26,7 +26,6 @@ function Approuter() {
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/product/new" element={<ProductForm />} />
         <Route path="/product/edit/:id" element={<ProductForm />} />
-        Admin Routes
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />

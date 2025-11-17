@@ -113,6 +113,7 @@ const ProductsPageLocal = () => {
                   className={styles.containerComponentCard}
                 >
                   <Card
+                    id={producto.id}
                     title={producto.title}
                     price={producto.price}
                     image={producto.image}
