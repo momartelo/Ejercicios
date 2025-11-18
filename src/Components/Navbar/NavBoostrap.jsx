@@ -45,11 +45,7 @@ function BootstrapNavBar() {
     <Navbar expand="lg" bg="light" variant="light">
       <Container fluid className="px-3">
         <Navbar.Brand onClick={handleLogoClick} style={{ cursor: "pointer" }}>
-          <img
-            src="../../../public/img/Logos/Logo2.png"
-            alt="Logo"
-            className={styles.logo}
-          />
+          <img src="/img/Logos/Logo2.png" alt="Logo" className={styles.logo} />
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
