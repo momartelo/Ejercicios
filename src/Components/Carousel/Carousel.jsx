@@ -6,14 +6,14 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import styles from "./Carousel.module.css";
 
+import img1 from "/img/Carousel/CarouselOK1.png";
+import img2 from "/img/Carousel/CarouselOK2.png";
+import img3 from "/img/Carousel/CarouselOK3.png";
+import img4 from "/img/Carousel/CarouselOK4.png";
+import img5 from "/img/Carousel/CarouselOK5.png";
+
 const Carousel = () => {
-  const images = [
-    "../../../public/img/Carousel/CarouselOK1.png",
-    "../../../public/img/Carousel/CarouselOK2.png",
-    "../../../public/img/Carousel/CarouselOK3.png",
-    "../../../public/img/Carousel/CarouselOK4.png",
-    "../../../public/img/Carousel/CarouselOK5.png",
-  ];
+  const images = [img1, img2, img3, img4, img5];
 
   return (
     <div className={styles.carouselContainer}>
