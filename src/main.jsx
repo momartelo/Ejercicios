@@ -9,28 +9,31 @@ import { AlertProvider } from "./Context/AlertContext";
 import { CategoryProvider } from "./Context/CategoryContex";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FavoritesProvider } from "./Context/FavoriteContex";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <AlertProvider>
       <AuthProvider>
-        <CartProvider>
-          <CategoryProvider>
-            <ScrollToTop />
-            <Approuter />
-            <ToastContainer
-              position="bottom-right"
-              autoClose={2000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              pauseOnHover
-              draggable
-              theme="colored"
-              toastStyle={{ fontSize: "0.8rem" }}
-            />
-          </CategoryProvider>
-        </CartProvider>
+        <FavoritesProvider>
+          <CartProvider>
+            <CategoryProvider>
+              <ScrollToTop />
+              <Approuter />
+              <ToastContainer
+                position="bottom-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                pauseOnHover
+                draggable
+                theme="colored"
+                toastStyle={{ fontSize: "0.8rem" }}
+              />
+            </CategoryProvider>
+          </CartProvider>
+        </FavoritesProvider>
       </AuthProvider>
     </AlertProvider>
   </BrowserRouter>

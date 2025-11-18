@@ -1,3 +1,4 @@
+// src/pages/ProductsPageLocal/ProductsPageLocal.jsx
 import MainLayout from "../../Layout/MainLayout";
 import styles from "./ProductsPageLocal.module.css";
 import {
@@ -14,21 +15,28 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ProductModal from "../../Components/ProductModal/ProductModal";
 
+// FAVORITES CONTEXT
+import { useFavorites } from "../../Context/FavoriteContex";
+
 const ProductsPageLocal = () => {
   const [productos, setProductos] = useState([]);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const { agregarAlCarrito } = useCart();
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const { category, categorias } = useCategory();
-  const { isAdminIn } = useAuth();
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const { agregarAlCarrito } = useCart();
+  const { category, categorias } = useCategory();
+  const { isAdminIn, user } = useAuth();
+  const { favorites, toggleFavorite } = useFavorites();
   const navigate = useNavigate();
 
+  // CARGAR PRODUCTOS
   useEffect(() => {
     const fetchLocalProductos = async () => {
       try {
         const data = await getLocalProducts();
+        console.log(data);
         setProductos(data);
         setFilteredProducts(data);
       } catch (error) {
@@ -40,17 +48,16 @@ const ProductsPageLocal = () => {
     fetchLocalProductos();
   }, []);
 
+  // FILTRAR PRODUCTOS POR CATEGORÍA
   useEffect(() => {
     if (category === "Todas") {
       setFilteredProducts(productos);
     } else {
-      const filtrados = productos.filter(
-        (producto) => producto.category === category
-      );
-      setFilteredProducts(filtrados);
+      setFilteredProducts(productos.filter((p) => p.category === category));
     }
   }, [category, productos]);
 
+  // ELIMINAR PRODUCTO
   const handleDelete = async (id) => {
     try {
       const result = await Swal.fire({
@@ -74,7 +81,6 @@ const ProductsPageLocal = () => {
           timer: 1500,
         });
 
-        // 🔥 Actualizar lista correctamente:
         setProductos((prev) => prev.filter((p) => p.id !== id));
       }
     } catch (error) {
@@ -99,6 +105,7 @@ const ProductsPageLocal = () => {
           onDelete={() => handleDelete(selectedProduct.id)}
         />
       )}
+
       <MainLayout categorias={categorias}>
         <Carousel />
         <div className={styles.containerProducts}>
@@ -107,31 +114,39 @@ const ProductsPageLocal = () => {
 
           <ul className={styles.containerUlProduct}>
             {filteredProducts.length > 0 ? (
-              filteredProducts.map((producto) => (
-                <div
-                  key={producto.id}
-                  className={styles.containerComponentCard}
-                >
-                  <Card
-                    id={producto.id}
-                    title={producto.title}
-                    price={producto.price}
-                    image={producto.image}
-                    rating={producto.rating?.rate || 0}
-                    onAddToCart={() => agregarAlCarrito(producto)}
-                    isAdmin={isAdminIn}
-                    onEdit={() => navigate(`/product/edit/${producto.id}`)}
-                    onDelete={() => handleDelete(producto.id)}
-                    onViewMore={() => setSelectedProduct(producto)}
-                    className={styles.containerCard}
-                    titleClass={styles.title}
-                    priceClass={styles.price}
-                    ratingClass={styles.rating}
-                    buttonClass={styles.buttonAdd}
-                    imageClass={styles.imageClass}
-                  />
-                </div>
-              ))
+              filteredProducts.map((producto) => {
+                const isFavorite = favorites.some(
+                  (f) => f.productId === Number(producto.id)
+                );
+
+                return (
+                  <div
+                    key={producto.id}
+                    className={styles.containerComponentCard}
+                  >
+                    <Card
+                      id={producto.id}
+                      title={producto.title}
+                      price={producto.price}
+                      image={producto.image}
+                      rating={producto.rating?.rate || 0}
+                      onAddToCart={() => agregarAlCarrito(producto)}
+                      isAdmin={isAdminIn}
+                      onEdit={() => navigate(`/product/edit/${producto.id}`)}
+                      onDelete={() => handleDelete(producto.id)}
+                      onViewMore={() => setSelectedProduct(producto)}
+                      isFavorite={isFavorite}
+                      onToggleFavorite={() => toggleFavorite(producto.id)}
+                      className={styles.containerCard}
+                      titleClass={styles.title}
+                      priceClass={styles.price}
+                      ratingClass={styles.rating}
+                      buttonClass={styles.buttonAdd}
+                      imageClass={styles.imageClass}
+                    />
+                  </div>
+                );
+              })
             ) : (
               <p>No hay productos en esta categoría.</p>
             )}

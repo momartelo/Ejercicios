@@ -7,6 +7,8 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import styles from "./Card.module.css";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useFavorites } from "../../Context/FavoriteContex";
+import { useAuth } from "../../Context/AuthContex";
 
 const Card = ({
   id,
@@ -31,28 +33,17 @@ const Card = ({
   isAdmin,
   onViewMore,
 }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  const toggleFavorite = () => {
-    setIsFavorite((prev) => !prev);
-  };
-
-  const setFavorite = () => {
-    if (isFavorite) {
-      setFavoritos(id, users.id);
-    }
-  };
+  const { user } = useAuth();
+  const { favorites, toggleFavorite } = useFavorites();
+  const isFavorite = favorites.some((f) => String(f.productId) === String(id));
 
   return (
     <div className={className} style={style}>
       <div className={styles.containerFavorite}>
         <button
           className={styles.buttonFavorite}
-          onClick={toggleFavorite}
-          style={{
-            color: isFavorite ? "red" : "gray",
-          }}
-          aria-label="Agregar a favoritos"
+          onClick={() => toggleFavorite(id)}
+          style={{ color: isFavorite ? "red" : "gray" }}
         >
           {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
         </button>

@@ -10,6 +10,7 @@ import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import HomePage from "./Pages/HomePage/HomePage";
 import ProductForm from "./Pages/ProductForm/ProductForm";
 import ProductsPageLocal from "./Pages/ProductsPageLocal/ProductsPageLocal";
+import FavoritesPage from "./Pages/FavoritesPage/FavoritesPage";
 
 function Approuter() {
   return (
@@ -26,6 +27,7 @@ function Approuter() {
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/product/new" element={<ProductForm />} />
         <Route path="/product/edit/:id" element={<ProductForm />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />

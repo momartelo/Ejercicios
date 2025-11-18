@@ -63,19 +63,40 @@ function BootstrapNavBar() {
               {isLoading ? (
                 <NavDropdown.Item disabled>Cargando...</NavDropdown.Item>
               ) : (
-                categorias.map((cat) => (
+                <>
+                  {/* "Todas" Siempre primero */}
                   <NavDropdown.Item
-                    key={cat}
-                    active={cat === category}
+                    key="Todas"
+                    active={category === "Todas"}
                     onClick={() => {
-                      setCategory(cat);
+                      setCategory("Todas");
                       navigate("/");
                     }}
                     className={styles.dropdownItem}
                   >
-                    {cat}
+                    Todas
                   </NavDropdown.Item>
-                ))
+
+                  <NavDropdown.Divider />
+
+                  {/* Resto ordenado alfabéticamente */}
+                  {categorias
+                    .filter((c) => c !== "Todas")
+                    .sort((a, b) => a.localeCompare(b))
+                    .map((cat) => (
+                      <NavDropdown.Item
+                        key={cat}
+                        active={cat === category}
+                        onClick={() => {
+                          setCategory(cat);
+                          navigate("/");
+                        }}
+                        className={styles.dropdownItem}
+                      >
+                        {cat}
+                      </NavDropdown.Item>
+                    ))}
+                </>
               )}
             </NavDropdown>
 

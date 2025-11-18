@@ -2,7 +2,6 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "./AlertContext";
 import users from "../Data/UsersData";
-console.log("📁 Usuarios importados:", users);
 
 const AuthContext = createContext();
 
@@ -10,6 +9,8 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdminIn, setIsAdminIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // 🚨 ¡NUEVO ESTADO!
+
   const navigate = useNavigate();
   const { showAlert } = useAlert();
 
@@ -26,10 +27,13 @@ export const AuthProvider = ({ children }) => {
         setIsAdminIn(true);
       }
     }
-  }, []);
+
+    setIsLoading(false); // 👈 Se pone en false al finalizar la verificación
+  }, []); // Se ejecuta una sola vez al montar
 
   // 🔹 Login con detección de rol
   const login = (email, password) => {
+    // ... tu lógica de login existente
     const userFound = users.find(
       (u) =>
         u.email.trim().toLowerCase() === email.trim().toLowerCase() &&
@@ -41,9 +45,6 @@ export const AuthProvider = ({ children }) => {
       return false;
     }
 
-    console.log("🧠 Usuario encontrado:", userFound);
-    console.log("Rol detectado:", userFound?.role);
-
     const token = `fake-token-${email}`;
     localStorage.setItem("authToken", token);
     localStorage.setItem("user", JSON.stringify(userFound));
@@ -53,8 +54,6 @@ export const AuthProvider = ({ children }) => {
 
     const isAdmin = userFound.role?.toLowerCase() === "admin";
     setIsAdminIn(isAdmin);
-
-    console.log(isAdmin ? "✅ Es admin" : "🟦 Es cliente");
 
     showAlert(`Bienvenido ${userFound.name} 👋`, "success");
 
@@ -67,6 +66,7 @@ export const AuthProvider = ({ children }) => {
 
   // 🔹 Logout
   const logout = () => {
+    // ... tu lógica de logout existente
     localStorage.removeItem("authToken");
     localStorage.removeItem("user");
     localStorage.removeItem("checkoutTotal");
@@ -87,6 +87,7 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         user,
+        isLoading, // 🚨 ¡EXPORTAR EL NUEVO ESTADO!
       }}
     >
       {children}
