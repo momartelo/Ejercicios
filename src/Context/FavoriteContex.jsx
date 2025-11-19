@@ -3,6 +3,8 @@ import { useAuth } from "./AuthContex";
 
 const FavoritesContext = createContext();
 
+const API = import.meta.env.VITE_BACK_API_URL;
+
 export const FavoritesProvider = ({ children }) => {
   const { user, isLoggedIn } = useAuth();
   const [favorites, setFavorites] = useState([]);
@@ -15,9 +17,9 @@ export const FavoritesProvider = ({ children }) => {
       }
 
       try {
-        const data = await fetch(
-          `http://localhost:3001/favorites/${user.id}`
-        ).then((r) => r.json());
+        const data = await fetch(`${API}/favorites/${user.id}`).then((r) =>
+          r.json()
+        );
 
         setFavorites(data);
       } catch (error) {
@@ -28,15 +30,13 @@ export const FavoritesProvider = ({ children }) => {
     cargarFavoritos();
   }, [isLoggedIn, user]);
 
-  // Función para alternar favorito
   const toggleFavorite = async (productId) => {
     if (!user || !productId) return;
 
-    // Convertir siempre a string para coincidir con los ids de tu db
     const productIdStr = String(productId);
 
     try {
-      await fetch("http://localhost:3001/favorites/toggle", {
+      await fetch(`${API}/favorites/toggle`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId: user.id, productId: productIdStr }),
