@@ -144,6 +144,9 @@ function BootstrapNavBar() {
                 <NavDropdown.Item onClick={() => navigate("/cuenta")}>
                   Cuenta
                 </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => navigate("/favorites")}>
+                  Mis Favoritos
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={logout} className={styles.logout}>
                   Cerrar sesión

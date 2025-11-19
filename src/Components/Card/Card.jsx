@@ -52,13 +52,13 @@ const Card = ({
       <h2 className={titleClass}>{title}</h2>
       <p className={descriptionClass}>{description}</p>
       <p className={detailsClass}>{details}</p>
+      <button onClick={onViewMore} className={styles.viewMore}>
+        Ver más
+      </button>
       <div className={ratingClass}>
         <RatingStars value={rating} showValue={true} />
       </div>
       <p className={priceClass}>{limpiarYFormatearPrecio(price)}</p>
-      <button onClick={onViewMore} className={styles.viewMore}>
-        Ver más
-      </button>
       {isAdmin && (
         <div className={styles.adminButtons}>
           <button className={styles.editButton} onClick={onEdit}>

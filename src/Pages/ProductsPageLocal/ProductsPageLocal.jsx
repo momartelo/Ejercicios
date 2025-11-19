@@ -1,4 +1,3 @@
-// src/pages/ProductsPageLocal/ProductsPageLocal.jsx
 import MainLayout from "../../Layout/MainLayout";
 import styles from "./ProductsPageLocal.module.css";
 import {

@@ -123,11 +123,11 @@
   border: none;
   color: #0077ff;
   font-size: 14px;
-  margin-top: 8px;
+  margin: 0 0 8px 0;
   cursor: pointer;
   padding: 0;
 }
 
 .viewMore:hover {
-  text-decoration: underline;
+  color: #105bd5;
 }

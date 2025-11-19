@@ -1,4 +1,5 @@
 import styles from "./ProductModal.module.css";
+import { limpiarYFormatearPrecio } from "../../Functions/PriceFormatter";
 
 const ProductModal = ({
   product,
@@ -20,7 +21,7 @@ const ProductModal = ({
         <img src={product.image} className={styles.image} alt={product.title} />
 
         <h2 className={styles.title}>{product.title}</h2>
-        <p className={styles.price}>${product.price}</p>
+        <p className={styles.price}>{limpiarYFormatearPrecio(product.price)}</p>
 
         <p className={styles.description}>{product.description}</p>
 
