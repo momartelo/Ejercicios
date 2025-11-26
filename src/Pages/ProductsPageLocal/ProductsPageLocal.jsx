@@ -13,6 +13,7 @@ import { useAuth } from "../../Context/AuthContex";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ProductModal from "../../Components/ProductModal/ProductModal";
+import { useSearch } from "../../Context/SearchContex";
 
 // FAVORITES CONTEXT
 import { useFavorites } from "../../Context/FavoriteContex";
@@ -29,6 +30,8 @@ const ProductsPageLocal = () => {
   const { isAdminIn, user } = useAuth();
   const { favorites, toggleFavorite } = useFavorites();
   const navigate = useNavigate();
+
+  const { searchQuery } = useSearch();
 
   // CARGAR PRODUCTOS
   useEffect(() => {
@@ -47,14 +50,23 @@ const ProductsPageLocal = () => {
     fetchLocalProductos();
   }, []);
 
-  // FILTRAR PRODUCTOS POR CATEGORÍA
   useEffect(() => {
-    if (category === "Todas") {
-      setFilteredProducts(productos);
-    } else {
-      setFilteredProducts(productos.filter((p) => p.category === category));
+    let filtered = [...productos];
+
+    // filtro por categoría
+    if (category !== "Todas") {
+      filtered = filtered.filter((p) => p.category === category);
     }
-  }, [category, productos]);
+
+    // filtro por texto
+    if (searchQuery.trim() !== "") {
+      filtered = filtered.filter((p) =>
+        p.title.toLowerCase().includes(searchQuery)
+      );
+    }
+
+    setFilteredProducts(filtered);
+  }, [category, productos, searchQuery]);
 
   // ELIMINAR PRODUCTO
   const handleDelete = async (id) => {

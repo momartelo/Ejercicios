@@ -5,11 +5,13 @@ import { useFavorites } from "../../Context/FavoriteContex";
 import { getLocalProducts } from "../../Functions/ProductsLocalAPI";
 import Card from "../../Components/Card/Card";
 import MainLayout from "../../Layout/MainLayout";
+import ProductModal from "../../Components/ProductModal/ProductModal";
 
 const FavoritesPage = () => {
   const { user, isLoggedIn } = useAuth();
   const { favorites, toggleFavorite } = useFavorites();
   const [productos, setProductos] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -33,26 +35,42 @@ const FavoritesPage = () => {
     .filter(Boolean);
 
   return (
-    <MainLayout>
-      <h2>Mis Favoritos</h2>
+    <>
+      {selectedProduct && (
+        <ProductModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+          hideActions={true} // 👈 OCULTA solo los botones de acción
+        />
+      )}
+      <MainLayout>
+        <h2 className={styles.containerTitle}>Mis Favoritos</h2>
 
-      {userFavorites.length === 0 && <p>No tienes productos favoritos.</p>}
+        {userFavorites.length === 0 && <p>No tienes productos favoritos.</p>}
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-        {userFavorites.map((product) => (
-          <Card
-            key={product.id}
-            id={product.id}
-            title={product.title}
-            price={product.price}
-            image={product.image}
-            rating={product.rating?.rate || 0}
-            isFavorite={true}
-            onToggleFavorite={() => toggleFavorite(product.id)}
-          />
-        ))}
-      </div>
-    </MainLayout>
+        <div className={styles.containerWrapper}>
+          {userFavorites.map((product) => (
+            <Card
+              key={product.id}
+              id={product.id}
+              title={product.title}
+              price={product.price}
+              image={product.image}
+              rating={product.rating?.rate || 0}
+              isFavorite={true}
+              onToggleFavorite={() => toggleFavorite(product.id)}
+              onViewMore={() => setSelectedProduct(product)}
+              className={styles.containerCard}
+              titleClass={styles.title}
+              priceClass={styles.price}
+              ratingClass={styles.rating}
+              buttonClass={styles.hideButton}
+              imageClass={styles.imageClass}
+            />
+          ))}
+        </div>
+      </MainLayout>
+    </>
   );
 };
 

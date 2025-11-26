@@ -6,12 +6,14 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import { useCategory } from "../../Context/CategoryContex";
 import { useCart } from "../../Context/CartContext";
 import { useAuth } from "../../Context/AuthContex";
 import styles from "./NavBoostrap.module.css";
 import Login from "../Login/Login";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useSearch } from "../../Context/SearchContex";
 
 function BootstrapNavBar() {
   const { categorias, category, setCategory, isLoading } = useCategory();
@@ -40,6 +42,8 @@ function BootstrapNavBar() {
 
   const handleOpenLogin = () => setOpenLogin(true);
   const handleCloseLogin = () => setOpenLogin(false);
+
+  const { setSearchQuery } = useSearch();
 
   return (
     <Navbar expand="lg" bg="light" variant="light">
@@ -121,6 +125,14 @@ function BootstrapNavBar() {
           </Nav>
 
           <Nav className="ms-auto align-items-center">
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                placeholder="Buscar productos..."
+                className="me-2"
+                onChange={(e) => setSearchQuery(e.target.value.toLowerCase())}
+              />
+            </Form>
             <Nav.Link as={Link} to="/cart" className={styles.cartLink}>
               <ShoppingCartIcon className={styles.shoppingIcon} />
 

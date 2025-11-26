@@ -12,8 +12,15 @@ import img3 from "/img/Carousel/CarouselOK3.png";
 import img4 from "/img/Carousel/CarouselOK4.png";
 import img5 from "/img/Carousel/CarouselOK5.png";
 
+import mob1 from "/img/Carousel/CarouselOK1lm.png";
+import mob2 from "/img/Carousel/CarouselOK2lm.png";
+import mob3 from "/img/Carousel/CarouselOK3lm.png";
+import mob4 from "/img/Carousel/CarouselOK4lm.png";
+import mob5 from "/img/Carousel/CarouselOK5lm.png";
+
 const Carousel = () => {
-  const images = [img1, img2, img3, img4, img5];
+  const imagesDesktop = [img1, img2, img3, img4, img5];
+  const imagesMobile = [mob1, mob2, mob3, mob4, mob5];
 
   return (
     <div className={styles.carouselContainer}>
@@ -31,13 +38,16 @@ const Carousel = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className={styles.swiperContainer}
       >
-        {images.map((src, index) => (
+        {imagesDesktop.map((src, index) => (
           <SwiperSlide key={index} className={styles.slide}>
-            <img
-              src={src}
-              alt={`Slide ${index + 1}`}
-              className={styles.image}
-            />
+            <picture>
+              <source srcSet={imagesMobile[index]} media="(max-width: 500px)" />
+              <img
+                src={src}
+                alt={`Slide ${index + 1}`}
+                className={styles.image}
+              />
+            </picture>
           </SwiperSlide>
         ))}
       </Swiper>

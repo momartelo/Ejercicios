@@ -1,6 +1,6 @@
 .containerProducts {
   position: relative;
-  margin-top: -100px; /* 🔥 levanta el contenedor sobre el carrusel */
+  margin-top: -80px; /* 🔥 levanta el contenedor sobre el carrusel */
   z-index: 10; /* asegura que quede arriba del carrusel */
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(5px);
@@ -134,4 +134,49 @@
 
 .buttonAddProduct:hover {
   background-color: #218838;
+}
+
+@media (max-width: 1200px) {
+  .containerProducts {
+    margin-top: -70px; /* o el valor que quieras */
+  }
+}
+
+@media (max-width: 900px) {
+  .containerProducts {
+    margin-top: -60px; /* o el valor que quieras */
+  }
+}
+
+@media (max-width: 768px) {
+  .containerProducts {
+    margin-top: -50px; /* o el valor que quieras */
+  }
+}
+
+@media (max-width: 550px) {
+  .containerProducts {
+    margin-top: -30px; /* aún menos para celulares chicos */
+  }
+}
+
+@media (max-width: 549px) {
+  .containerComponentCard {
+    width: 75%;
+  }
+  .containerCard {
+    width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+  .containerProducts {
+    margin-top: -15px;
+  }
+  .containerComponentCard {
+    width: 80%;
+  }
+  .containerCard {
+    width: 100%;
+  }
 }

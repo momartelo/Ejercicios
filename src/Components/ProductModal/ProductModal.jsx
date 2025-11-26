@@ -8,6 +8,7 @@ const ProductModal = ({
   isAdmin,
   onEdit,
   onDelete,
+  hideActions = false,
 }) => {
   if (!product) return null;
 
@@ -27,22 +28,24 @@ const ProductModal = ({
 
         {product.details && <p className={styles.details}>{product.details}</p>}
 
-        <div className={styles.buttons}>
-          <button onClick={() => onAddToCart(product)} className={styles.add}>
-            Agregar al carrito
-          </button>
+        {!hideActions && (
+          <div className={styles.buttons}>
+            <button onClick={() => onAddToCart(product)} className={styles.add}>
+              Agregar al carrito
+            </button>
 
-          {isAdmin && (
-            <>
-              <button onClick={onEdit} className={styles.edit}>
-                Editar
-              </button>
-              <button onClick={onDelete} className={styles.delete}>
-                Borrar
-              </button>
-            </>
-          )}
-        </div>
+            {isAdmin && (
+              <>
+                <button onClick={onEdit} className={styles.edit}>
+                  Editar
+                </button>
+                <button onClick={onDelete} className={styles.delete}>
+                  Borrar
+                </button>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

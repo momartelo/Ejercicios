@@ -1,0 +1,66 @@
+.containerTitle {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.containerWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.containerCard {
+  background: #fff;
+  border-radius: 12px;
+  width: 250px;
+  min-height: 250px; /* un poco más alta para ver bien la diferencia */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* reparte espacio */
+  align-items: center;
+  padding: 15px 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+.containerCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.title {
+  font-family: Arial;
+  font-size: 0.9rem;
+  font-weight: 500;
+  /* min-height: 3.75rem; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  display: box; /* opcional, para compatibilidad futura */
+  -webkit-line-clamp: 2; /* Chrome, Safari, Edge */
+  line-clamp: 2; /* estándar futura */
+  -webkit-box-orient: vertical;
+  margin: 20px 0 0 0;
+}
+
+.price {
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: 10px 0 10px 0;
+}
+
+.hideButton {
+  display: none !important;
+}
+
+.imageClass {
+  width: 50%;
+  height: 100px;
+  object-fit: contain;
+}
+
+.hideOnlyActionButtons .buttons {
+  display: none !important;
+}
