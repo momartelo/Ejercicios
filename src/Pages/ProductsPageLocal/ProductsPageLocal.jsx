@@ -14,9 +14,8 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ProductModal from "../../Components/ProductModal/ProductModal";
 import { useSearch } from "../../Context/SearchContex";
-
-// FAVORITES CONTEXT
 import { useFavorites } from "../../Context/FavoriteContex";
+import CustomPagination from "../../Components/CustomPagination/CustomPagination";
 
 const ProductsPageLocal = () => {
   const [productos, setProductos] = useState([]);
@@ -25,9 +24,12 @@ const ProductsPageLocal = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6; // ⭐ cantidad por página
+
   const { agregarAlCarrito } = useCart();
   const { category, categorias } = useCategory();
-  const { isAdminIn, user } = useAuth();
+  const { isAdminIn } = useAuth();
   const { favorites, toggleFavorite } = useFavorites();
   const navigate = useNavigate();
 
@@ -38,7 +40,6 @@ const ProductsPageLocal = () => {
     const fetchLocalProductos = async () => {
       try {
         const data = await getLocalProducts();
-        console.log(data);
         setProductos(data);
         setFilteredProducts(data);
       } catch (error) {
@@ -50,15 +51,14 @@ const ProductsPageLocal = () => {
     fetchLocalProductos();
   }, []);
 
+  // FILTROS
   useEffect(() => {
     let filtered = [...productos];
 
-    // filtro por categoría
     if (category !== "Todas") {
       filtered = filtered.filter((p) => p.category === category);
     }
 
-    // filtro por texto
     if (searchQuery.trim() !== "") {
       filtered = filtered.filter((p) =>
         p.title.toLowerCase().includes(searchQuery)
@@ -68,7 +68,21 @@ const ProductsPageLocal = () => {
     setFilteredProducts(filtered);
   }, [category, productos, searchQuery]);
 
-  // ELIMINAR PRODUCTO
+  // ⭐ Resetear página cuando cambian los filtros
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filteredProducts]);
+
+  // ⭐ PAGINACIÓN
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
+  // BORRAR PRODUCTO
   const handleDelete = async (id) => {
     try {
       const result = await Swal.fire({
@@ -95,7 +109,6 @@ const ProductsPageLocal = () => {
         setProductos((prev) => prev.filter((p) => p.id !== id));
       }
     } catch (error) {
-      console.error(error);
       Swal.fire({
         icon: "error",
         title: "Error",
@@ -124,8 +137,8 @@ const ProductsPageLocal = () => {
           {error && <p>Error: {error}</p>}
 
           <ul className={styles.containerUlProduct}>
-            {filteredProducts.length > 0 ? (
-              filteredProducts.map((producto) => {
+            {currentProducts.length > 0 ? (
+              currentProducts.map((producto) => {
                 const isFavorite = favorites.some(
                   (f) => f.productId === Number(producto.id)
                 );
@@ -162,6 +175,12 @@ const ProductsPageLocal = () => {
               <p>No hay productos en esta categoría.</p>
             )}
           </ul>
+
+          <CustomPagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
         </div>
       </MainLayout>
     </>
