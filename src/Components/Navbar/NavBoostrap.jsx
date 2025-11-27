@@ -32,9 +32,10 @@ function BootstrapNavBar() {
   const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
 
   const obtenerIniciales = (name) => {
+    if (!name) return "";
     return name
       .split(" ")
-      .map((n) => n[0].toUpperCase())
+      .map((n) => n[0]?.toUpperCase() || "")
       .join("");
   };
 
@@ -144,7 +145,7 @@ function BootstrapNavBar() {
             </Nav.Link>
             {isLoggedIn ? (
               <NavDropdown
-                title={obtenerIniciales(user.name)}
+                title={user?.name ? obtenerIniciales(user.name) : "?"}
                 id="user-dropdown"
                 show={showUserDropdown}
                 onClick={() => setShowUserDropdown(!showUserDropdown)}
