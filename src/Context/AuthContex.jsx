@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
       const parsedUser = JSON.parse(storedUser);
       setUser(parsedUser);
       setIsLoggedIn(true);
+      console.log("🔍 Usuario cargado desde localStorage:", parsedUser);
       if (parsedUser.role === "admin") {
         setIsAdminIn(true);
       }
@@ -43,6 +44,7 @@ export const AuthProvider = ({ children }) => {
       );
 
       const data = await res.json();
+      console.log("📌 Usuario recibido del backend:", data.user);
 
       if (!res.ok) {
         showAlert(data.error || "Credenciales incorrectas", "error");

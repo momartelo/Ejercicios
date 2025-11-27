@@ -21,6 +21,8 @@ function BootstrapNavBar() {
   const { isLoggedIn, user, logout, login, isAdminIn } = useAuth();
   const navigate = useNavigate();
 
+  console.log("USER EN NAV:", user); // 👈 AGREGADO AQUÍ
+
   const handleLogoClick = () => {
     setCategory("Todas"); // reset del filtro
     navigate("/"); // navegar al inicio después
