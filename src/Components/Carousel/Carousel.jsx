@@ -6,11 +6,11 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import styles from "./Carousel.module.css";
 
-import img1 from "/img/Carousel/CarouselOK1.png";
-import img2 from "/img/Carousel/CarouselOK2.png";
-import img3 from "/img/Carousel/CarouselOK3.png";
-import img4 from "/img/Carousel/CarouselOK4.png";
-import img5 from "/img/Carousel/CarouselOK5.png";
+import img1 from "/img/Carousel/CarouselOK1400.png";
+import img2 from "/img/Carousel/CarouselOK2400.png";
+import img3 from "/img/Carousel/CarouselOK3400.png";
+import img4 from "/img/Carousel/CarouselOK4400.png";
+import img5 from "/img/Carousel/CarouselOK5400.png";
 
 import mob1 from "/img/Carousel/CarouselOK1lm.png";
 import mob2 from "/img/Carousel/CarouselOK2lm.png";

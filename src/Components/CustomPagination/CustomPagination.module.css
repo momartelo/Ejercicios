@@ -1,0 +1,14 @@
+.customPagination :global(.page-link) {
+  color: #b8860b !important;
+  border: none;
+}
+
+.activePagination :global(.page-link) {
+  background-color: #b8860b !important;
+  border-color: #b8860b !important;
+  color: white !important;
+}
+
+:global(.page-item.disabled) :global(.page-link) {
+  cursor: default;
+}

@@ -1,17 +1,23 @@
 import Pagination from "react-bootstrap/Pagination";
+import styles from "./CustomPagination.module.css";
 
 const CustomPagination = ({ currentPage, totalPages, onPageChange }) => {
   if (totalPages <= 1) return null;
 
   const items = [];
 
-  // --- Caso: solo 2 páginas → mostrar ambas
+  const itemClass = (page) =>
+    page === currentPage
+      ? `${styles.customPagination} ${styles.activePagination}`
+      : styles.customPagination;
+
   if (totalPages === 2) {
     items.push(
       <Pagination.Item
         key={1}
         active={currentPage === 1}
         onClick={() => onPageChange(1)}
+        className={itemClass(1)}
       >
         1
       </Pagination.Item>
@@ -21,6 +27,7 @@ const CustomPagination = ({ currentPage, totalPages, onPageChange }) => {
         key={2}
         active={currentPage === 2}
         onClick={() => onPageChange(2)}
+        className={itemClass(2)}
       >
         2
       </Pagination.Item>
@@ -29,25 +36,21 @@ const CustomPagination = ({ currentPage, totalPages, onPageChange }) => {
     return <Pagination>{items}</Pagination>;
   }
 
-  // --- Caso: 3 o más páginas → sistema con puntos (...)
-
-  // Primera página
   items.push(
     <Pagination.Item
       key={1}
       active={currentPage === 1}
       onClick={() => onPageChange(1)}
+      className={itemClass(1)}
     >
       1
     </Pagination.Item>
   );
 
-  // Puntos suspensivos izquierdo
   if (currentPage > 3) {
     items.push(<Pagination.Ellipsis key="left-ellipsis" disabled />);
   }
 
-  // Páginas centrales (current-1, current, current+1)
   const start = Math.max(2, currentPage - 1);
   const end = Math.min(totalPages - 1, currentPage + 1);
 
@@ -57,23 +60,23 @@ const CustomPagination = ({ currentPage, totalPages, onPageChange }) => {
         key={i}
         active={currentPage === i}
         onClick={() => onPageChange(i)}
+        className={itemClass(i)}
       >
         {i}
       </Pagination.Item>
     );
   }
 
-  // Puntos suspensivos derecho
   if (currentPage < totalPages - 2) {
     items.push(<Pagination.Ellipsis key="right-ellipsis" disabled />);
   }
 
-  // Última página
   items.push(
     <Pagination.Item
       key={totalPages}
       active={currentPage === totalPages}
       onClick={() => onPageChange(totalPages)}
+      className={itemClass(totalPages)}
     >
       {totalPages}
     </Pagination.Item>
