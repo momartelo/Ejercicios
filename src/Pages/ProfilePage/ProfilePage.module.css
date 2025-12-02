@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: column;
   width: 90%;
-  max-width: 450px;
+  max-width: 600px;
   background: white;
   padding: 25px 30px;
   border-radius: 10px;
@@ -78,10 +78,10 @@ input:focus {
 }
 
 .buttonCancel,
-.buttonSave {
-  width: 45%;
+.buttonSave,
+.buttonEditMore {
+  width: 32%;
   padding: 10px;
-
   margin: 20px 0;
   color: #333;
   border-radius: 5px;
@@ -95,7 +95,8 @@ input:focus {
 }
 
 .buttonCancel:hover,
-.buttonSave:hover {
+.buttonSave:hover,
+.buttonEditMore:hover {
   color: #d8a602;
   border: 1px #e4e4e4 solid;
 }
@@ -113,7 +114,37 @@ input:focus {
   border-radius: 2px;
 }
 
-/* 🟦 Responsive */
+@media (max-width: 1369px) {
+  .containerProfilePage {
+    padding-top: 10px;
+  }
+  .containerForm {
+    width: 95%;
+    padding: 10px 20px 10px 20px;
+    margin-bottom: 1rem;
+  }
+  .buttonCancel,
+  .buttonSave,
+  .buttonEditMore {
+    margin: 10px;
+  }
+
+  .pageTitle {
+    font-size: 1.7rem;
+  }
+
+  .name {
+    font-size: 1.1rem;
+  }
+  input {
+    padding: 9px;
+  }
+
+  .separator {
+    margin: 20px 0 10px 0;
+  }
+}
+
 @media (max-width: 600px) {
   .containerForm {
     width: 95%;

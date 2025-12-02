@@ -13,6 +13,7 @@ import ProductsPageLocal from "./Pages/ProductsPageLocal/ProductsPageLocal";
 import FavoritesPage from "./Pages/FavoritesPage/FavoritesPage";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import EditUsersPage from "./Pages/EditUsersPage/EditUsersPage";
+import AccountPage from "./Pages/AccountPage/AccountPage";
 
 function Approuter() {
   return (
@@ -32,6 +33,7 @@ function Approuter() {
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/editUsers" element={<EditUsersPage />} />
+        <Route path="/account" element={<AccountPage />} />
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />

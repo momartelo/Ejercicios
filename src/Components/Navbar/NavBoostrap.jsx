@@ -54,7 +54,11 @@ function BootstrapNavBar() {
 
   return (
     <Navbar expand="lg" bg="light" variant="light">
-      <Container fluid className="px-3">
+      <Container
+        fluid
+        className="px-3"
+        style={{ borderBottom: "2px solid #f8f0d4ff" }}
+      >
         <Navbar.Brand onClick={handleLogoClick} style={{ cursor: "pointer" }}>
           <img src="/img/Logos/Logo2.png" alt="Logo" className={styles.logo} />
         </Navbar.Brand>
@@ -163,7 +167,7 @@ function BootstrapNavBar() {
                 <NavDropdown.Item onClick={() => navigate("/profile")}>
                   Perfil
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => navigate("/cuenta")}>
+                <NavDropdown.Item onClick={() => navigate("/account")}>
                   Cuenta
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={() => navigate("/favorites")}>

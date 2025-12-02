@@ -1,0 +1,138 @@
+.containerAccountPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 30px;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #333;
+  font-weight: 600;
+  font-family: "Inter";
+}
+
+.containerForm {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 600px;
+  background: white;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+  row-gap: 1rem;
+  margin-top: 1rem;
+}
+
+.groupAddress,
+.groupCountry,
+.groupName,
+.groupData {
+  display: flex;
+  column-gap: 1rem;
+}
+
+.groupAddress > div,
+.groupCountry > div,
+.groupName > div,
+.groupData > div {
+  flex: 1; /* ocupa el mismo ancho proporcional */
+}
+
+.groupAddress input,
+.groupCountry input,
+.groupName input,
+.groupData input {
+  width: 100%;
+  box-sizing: border-box; /* importante para padding y border */
+}
+
+.formName,
+.formCountry,
+.formProvince,
+.formAddress,
+.formCity,
+.formCodigoPostal,
+.formPhone,
+.formBirthday,
+.formGender {
+  display: flex;
+  flex-direction: column;
+}
+
+.separator {
+  width: 100%;
+  height: 1.5px;
+  background: linear-gradient(
+    to right,
+    rgba(209, 177, 70, 0.1),
+    rgba(209, 177, 70, 0.6),
+    rgba(209, 177, 70, 0.1)
+  );
+  margin: 30px 0 15px 0;
+  border-radius: 2px;
+}
+.containerButtons {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.buttonCancel,
+.buttonDelete,
+.buttonSave {
+  width: 32%;
+  padding: 10px;
+  margin: 20px 0;
+  color: #333;
+  border-radius: 5px;
+  font-weight: 400;
+  border: 1px #d1b146 solid;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+}
+
+.buttonCancel:hover,
+.buttonDelete:hover,
+.buttonSave:hover {
+  color: #d8a602;
+  border: 1px #e4e4e4 solid;
+}
+
+@media (max-width: 1369px) {
+  .containerAccountPage {
+    padding-top: 10px;
+  }
+  .containerForm {
+    width: 95%;
+    padding: 10px 20px 10px 20px;
+    margin-bottom: 1rem;
+    row-gap: 0.75rem;
+  }
+  .buttonCancel,
+  .buttonSave,
+  .buttonDelete {
+    margin: 10px;
+  }
+
+  .pageTitle {
+    font-size: 1.7rem;
+  }
+
+  .name {
+    font-size: 1.1rem;
+  }
+  input {
+    padding: 9px;
+  }
+
+  .separator {
+    margin: 10px 0 0 0;
+  }
+}
