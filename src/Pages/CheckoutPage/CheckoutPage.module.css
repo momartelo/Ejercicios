@@ -22,10 +22,15 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.totalPayText {
+  font-size: 1.5rem;
+}
+
 .totalPayValue {
   display: flex;
   font-size: 2rem;
   font-weight: 500;
+  color: #2b8a3e;
 }
 
 .containerTypesPay {
@@ -41,6 +46,11 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   border: none;
+}
+
+.containerTypesPay > button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px #ffe07c;
 }
 
 .containerConfirmacion {
@@ -64,4 +74,31 @@ button {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   border: none;
   height: 4rem;
+  font-weight: 600;
+}
+
+.buttonPay:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px #ffe07c;
+}
+
+.containerCartProduct {
+  list-style: none;
+  background: #fff;
+  border-radius: 12px;
+  width: 250px;
+  min-height: 250px; /* un poco más alta para ver bien la diferencia */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* reparte espacio */
+  align-items: center;
+  padding: 15px 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+
+.containerCartProduct:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px #ffe07c;
 }

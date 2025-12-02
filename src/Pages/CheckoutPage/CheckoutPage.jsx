@@ -30,13 +30,13 @@ const CheckoutPage = () => {
         <h2>Resumen de pago</h2>
 
         <div className={styles.containerTotalPay}>
-          <p className={styles.totalPaytext}>Un total de pesos:&nbsp;</p>
+          <p className={styles.totalPayText}>Un total de pesos:&nbsp;</p>
           <p className={styles.totalPayValue}>
             ${total.toLocaleString("es-AR", { minimumFractionDigits: 2 })}
           </p>
         </div>
 
-        <p>Seleccione el método de pago</p>
+        <p>Seleccione el método de pago:</p>
 
         <div className={styles.containerTypesPay}>
           <button onClick={() => handleSeleccion("Tarjeta de crédito")}>

@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Arial;
 }
 
 .containerCartPage {
@@ -20,11 +21,12 @@
   justify-content: space-around;
   align-items: center;
   width: 80%;
+  height: 60vh;
 }
 
 .cartEmpty > p {
   font-size: 1.5rem;
-  padding: 5rem 0 5rem 0;
+  padding: 6rem 0 4rem 0;
 }
 
 .buttons {
@@ -45,14 +47,15 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+  padding: 0;
 }
 
 .containerCartProduct {
   list-style: none;
   background: #fff;
-  border-radius: 8px;
+  border-radius: 12px;
   width: 250px;
-  min-height: 100px; /* un poco más alta para ver bien la diferencia */
+  min-height: 250px; /* un poco más alta para ver bien la diferencia */
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* reparte espacio */
@@ -60,6 +63,12 @@
   padding: 15px 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+
+.containerCartProduct:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px #ffe07c;
 }
 
 .containerImage {
@@ -70,9 +79,9 @@
   align-items: center;
 }
 
-.containerImage > img {
-  width: 75%;
-  height: 100%;
+.image {
+  width: 50%;
+  height: 100px;
   object-fit: contain;
 }
 
@@ -87,8 +96,9 @@
 .containerName > h3 {
   text-align: center;
   color: #333;
-  font-weight: 400;
-  font-size: 1.1rem;
+  font-family: Arial;
+  font-weight: 500;
+  font-size: 1rem;
 }
 
 .containerPrice {
@@ -100,21 +110,27 @@
 .containerPrice > p {
   text-align: center;
   color: #333;
+  font-family: Arial;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 400; /* texto normal */
 }
 
+.priceValue {
+  font-family: Arial;
+  font-weight: 700; /* negrita solo en el precio */
+  color: #2b8a3e;
+}
 .containerAmount {
   display: flex;
   justify-content: center;
   align-items: center;
   column-gap: 1rem;
-
   width: 100%;
 }
 
 .containerAmount > p {
   color: #333;
+  margin: 0;
 }
 
 .containerTotal > p {
@@ -122,7 +138,7 @@
   font-weight: 600;
 }
 
-.buttonClearCart {
+/* .buttonClearCart {
   padding: 10px;
   width: 25%;
   margin: 20px 0;
@@ -135,9 +151,9 @@
 
 .buttonClearCart:hover {
   background-color: #da190b;
-}
+} */
 
-.buttonHome,
+/* .buttonHome,
 .buttonBuyMore {
   padding: 10px;
   width: 25%;
@@ -154,7 +170,7 @@
 .buttonHome:hover,
 .buttonBuyMore:hover {
   background-color: #45a049;
-}
+} */
 
 .buttonsIncDec {
   padding: 10px;
@@ -185,18 +201,21 @@
 
 .totalResumen > h3 {
   color: #333;
+  font-weight: 300;
+  font-size: 1.5rem;
 }
 
 .totalResumen > h3 > span {
   color: green;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
 .buttonList {
   padding: 10px;
   width: 25%;
   margin: 20px 0;
-  background-color: #4caf50;
+  background-color: #f5cf52;
   color: #f5f5f5;
   border-radius: 5px;
   font-weight: 400;
@@ -209,17 +228,65 @@
   background-color: #45a049;
 }
 
-.buttonBuy {
+.buttonBuy,
+.buttonBuyMore,
+.buttonClearCart,
+.buttonHome {
   padding: 10px;
   width: 25%;
   margin: 20px 0;
-  background-color: #007bff;
-  color: #f5f5f5;
+  color: #333;
   border-radius: 5px;
   font-weight: 400;
-  border: #007bff;
+  border: 1px #d1b146 solid;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+  justify-content: center;
+  background-color: #f5f5f5;
 }
 
-.buttonBuy:hover {
-  background-color: #105bd5;
+.buttonBuy:hover,
+.buttonBuyMore:hover,
+.buttonClearCart:hover,
+.buttonHome:hover {
+  color: #d8a602;
+  border: 1px #e4e4e4 solid;
+}
+
+@media (max-width: 1369px) {
+  .containerCartPage {
+    padding: 10px 20px 20px 20px;
+  }
+  .buttonsIncDec {
+    font-size: 1rem;
+    padding: 5px;
+  }
+  .containerPrice > p {
+    margin: 0;
+  }
+  .containerTotal > p {
+    margin: 0;
+  }
+  .containerName {
+    margin: 0;
+  }
+  .title {
+    margin-bottom: 1rem;
+  }
+  .totalResumen > h3 {
+    margin: 0;
+  }
+}
+
+@media (max-width: 1981px) {
+  .containerButtons {
+    margin: 2rem 0 0 0;
+  }
+  .totalResumen > h3 {
+    margin-top: 2rem;
+  }
+  .containerProducts {
+    margin-top: 2rem;
+  }
 }

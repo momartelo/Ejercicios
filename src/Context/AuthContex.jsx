@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const { showAlert } = useAlert();
 
-  // 🔹 Al recargar la página, restauramos sesión
+  // 🧩 Restaurar sesión
   useEffect(() => {
     const storedToken = localStorage.getItem("authToken");
     const storedUser = localStorage.getItem("user");
@@ -22,16 +22,14 @@ export const AuthProvider = ({ children }) => {
       const parsedUser = JSON.parse(storedUser);
       setUser(parsedUser);
       setIsLoggedIn(true);
-      console.log("🔍 Usuario cargado desde localStorage:", parsedUser);
-      if (parsedUser.role === "admin") {
-        setIsAdminIn(true);
-      }
+
+      if (parsedUser.role === "admin") setIsAdminIn(true);
     }
 
     setIsLoading(false);
   }, []);
 
-  // 🔹 Login REAL usando BACKEND
+  // 🔐 Login real usando backend
   const login = async (email, password) => {
     try {
       const res = await fetch(
@@ -44,7 +42,6 @@ export const AuthProvider = ({ children }) => {
       );
 
       const data = await res.json();
-      console.log("📌 Usuario recibido del backend:", data.user);
 
       if (!res.ok) {
         showAlert(data.error || "Credenciales incorrectas", "error");
@@ -54,7 +51,6 @@ export const AuthProvider = ({ children }) => {
       const userFound = data.user;
       const token = data.token;
 
-      // Guardar sesión
       localStorage.setItem("authToken", token);
       localStorage.setItem("user", JSON.stringify(userFound));
 
@@ -65,8 +61,7 @@ export const AuthProvider = ({ children }) => {
       showAlert(`Bienvenido ${userFound.name} 👋`, "success");
 
       const from = window.history.state?.usr?.from;
-      if (from) navigate(from);
-      else navigate("/");
+      navigate("/");
 
       return true;
     } catch (err) {
@@ -75,11 +70,15 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // 🔹 Logout
+  // 🚪 Logout COMPLETO
   const logout = () => {
+    // Datos del usuario
     localStorage.removeItem("authToken");
     localStorage.removeItem("user");
     localStorage.removeItem("checkoutTotal");
+
+    // 🧹 Limpiar carrito guest
+    localStorage.removeItem("carrito_guest");
 
     setUser(null);
     setIsLoggedIn(false);

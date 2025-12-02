@@ -6,12 +6,14 @@ import { getLocalProducts } from "../../Functions/ProductsLocalAPI";
 import Card from "../../Components/Card/Card";
 import MainLayout from "../../Layout/MainLayout";
 import ProductModal from "../../Components/ProductModal/ProductModal";
+import { useCart } from "../../Context/CartContext";
 
 const FavoritesPage = () => {
   const { user, isLoggedIn } = useAuth();
   const { favorites, toggleFavorite } = useFavorites();
   const [productos, setProductos] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const { agregarAlCarrito } = useCart();
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -57,6 +59,7 @@ const FavoritesPage = () => {
               price={product.price}
               image={product.image}
               rating={product.rating?.rate || 0}
+              onAddToCart={() => agregarAlCarrito(product)}
               isFavorite={true}
               onToggleFavorite={() => toggleFavorite(product.id)}
               onViewMore={() => setSelectedProduct(product)}
@@ -64,7 +67,7 @@ const FavoritesPage = () => {
               titleClass={styles.title}
               priceClass={styles.price}
               ratingClass={styles.rating}
-              buttonClass={styles.hideButton}
+              buttonClass={styles.buttonAdd}
               imageClass={styles.imageClass}
             />
           ))}

@@ -11,6 +11,8 @@ import HomePage from "./Pages/HomePage/HomePage";
 import ProductForm from "./Pages/ProductForm/ProductForm";
 import ProductsPageLocal from "./Pages/ProductsPageLocal/ProductsPageLocal";
 import FavoritesPage from "./Pages/FavoritesPage/FavoritesPage";
+import ProfilePage from "./Pages/ProfilePage/ProfilePage";
+import EditUsersPage from "./Pages/EditUsersPage/EditUsersPage";
 
 function Approuter() {
   return (
@@ -28,6 +30,8 @@ function Approuter() {
         <Route path="/product/new" element={<ProductForm />} />
         <Route path="/product/edit/:id" element={<ProductForm />} />
         <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/editUsers" element={<EditUsersPage />} />
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />

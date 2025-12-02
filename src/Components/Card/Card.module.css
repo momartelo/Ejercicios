@@ -121,13 +121,14 @@
 .viewMore {
   background: none;
   border: none;
-  color: #0077ff;
+  color: #d8a602;
   font-size: 14px;
   margin: 0 0 8px 0;
   cursor: pointer;
   padding: 0;
+  text-decoration: underline;
 }
 
 .viewMore:hover {
-  color: #105bd5;
+  color: #333;
 }

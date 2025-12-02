@@ -12,18 +12,16 @@ const PrivateRoutes = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // 1. Si aún estamos cargando, salimos inmediatamente para esperar el estado final
     if (isLoading) {
       return;
-    } // 2. Si la carga terminó y el usuario NO está logueado, mostramos la alerta y redirigimos. //    Se excluye '/cart' de la redirección forzada si no está logueado, según tu lógica original.
-
+    }
     if (!isLoggedIn && location.pathname !== "/cart") {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Debe estar logueado para acceder a esta página.",
       }).then(() => {
-        navigate("/cart", {
+        navigate("/", {
           state: { from: location.pathname },
           replace: true,
         });

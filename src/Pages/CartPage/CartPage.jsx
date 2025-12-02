@@ -49,7 +49,7 @@ const CartPage = () => {
     <>
       <MainLayout>
         <div className={styles.containerCartPage}>
-          <h2>Carrito de productos</h2>
+          <h2 className={styles.title}>Carrito de productos</h2>
           {carrito.length === 0 ? (
             <div className={styles.cartEmpty}>
               <p>
@@ -77,15 +77,21 @@ const CartPage = () => {
                     return (
                       <li key={index} className={styles.containerCartProduct}>
                         <div className={styles.containerImage}>
-                          <img src={producto.image} alt="" />
+                          <img
+                            src={producto.image}
+                            alt=""
+                            className={styles.image}
+                          />
                         </div>
                         <div className={styles.containerName}>
                           <h3>{producto.title ?? producto.name}</h3>
                         </div>
                         <div className={styles.containerPrice}>
                           <p>
-                            Precio unitario:
-                            {limpiarYFormatearPrecio(precioString)}
+                            Precio unitario:{" "}
+                            <span className={styles.priceValue}>
+                              {limpiarYFormatearPrecio(precioString)}
+                            </span>
                           </p>
                         </div>
                         <div className={styles.containerAmount}>

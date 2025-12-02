@@ -17,11 +17,9 @@ import { useSearch } from "../../Context/SearchContex";
 
 function BootstrapNavBar() {
   const { categorias, category, setCategory, isLoading } = useCategory();
-  const { carrito } = useCart();
+  const { carrito, limpiarCarrito } = useCart();
   const { isLoggedIn, user, logout, login, isAdminIn } = useAuth();
   const navigate = useNavigate();
-
-  console.log("USER EN NAV:", user); // 👈 AGREGADO AQUÍ
 
   const handleLogoClick = () => {
     setCategory("Todas"); // reset del filtro
@@ -32,6 +30,12 @@ function BootstrapNavBar() {
   const [showEditDropdown, setShowEditDropdown] = useState(false);
 
   const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+
+  const handleLogout = () => {
+    limpiarCarrito(); // vacía carrito
+    logout(); // cierra sesión
+    navigate("/"); // opcional: redirige al home
+  };
 
   const obtenerIniciales = (name) => {
     if (!name) return "";
@@ -56,6 +60,7 @@ function BootstrapNavBar() {
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavDropdown
@@ -123,11 +128,13 @@ function BootstrapNavBar() {
                 <NavDropdown.Item onClick={() => navigate("/product/new")}>
                   Agregar Producto
                 </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => navigate("/editUsers")}>
+                  Editar Usuarios
+                </NavDropdown.Item>
               </NavDropdown>
             )}
           </Nav>
-
-          <Nav className="ms-auto align-items-center">
+          <Nav className="ms-auto align-items-center d-flex flex-row flex-lg-row gap-2 justify-content-center">
             <Form className="d-flex">
               <Form.Control
                 type="search"
@@ -153,7 +160,7 @@ function BootstrapNavBar() {
                 onClick={() => setShowUserDropdown(!showUserDropdown)}
                 align="end"
               >
-                <NavDropdown.Item onClick={() => navigate("/perfil")}>
+                <NavDropdown.Item onClick={() => navigate("/profile")}>
                   Perfil
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={() => navigate("/cuenta")}>
@@ -163,7 +170,10 @@ function BootstrapNavBar() {
                   Mis Favoritos
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item onClick={logout} className={styles.logout}>
+                <NavDropdown.Item
+                  onClick={handleLogout}
+                  className={styles.logout}
+                >
                   Cerrar sesión
                 </NavDropdown.Item>
               </NavDropdown>

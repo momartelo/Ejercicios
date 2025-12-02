@@ -1,95 +1,97 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { normalizarPrecio } from "../Functions/PriceFormatter";
 import { toast } from "react-toastify";
+import { useAuth } from "../Context/AuthContex";
 
 const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
-// Funciones auxiliares
-const getProductId = (producto) =>
-  producto.id || (producto.title ?? producto.name);
-const getProductName = (producto) =>
-  producto.title ?? producto.name ?? "Producto sin nombre";
+// Helpers
+const getProductId = (p) => p.id || p.title || p.name;
+const getProductName = (p) => p.title ?? p.name ?? "Producto sin nombre";
 
 export const CartProvider = ({ children }) => {
   const [carrito, setCarrito] = useState([]);
+  const { user, isLoggedIn } = useAuth();
 
-  // 🧮 Calcular total del carrito
-  const getTotal = () => {
-    return carrito.reduce((acumulado, producto) => {
-      const precio =
-        producto.precioNormalizado ??
-        normalizarPrecio(producto.precio ?? producto.price ?? "0");
-      return acumulado + precio * (producto.cantidad || 1);
-    }, 0);
-  };
+  // 🔑 Determinar la clave del carrito
+  const getCartKey = () =>
+    isLoggedIn && user?.id ? `carrito_${user.id}` : "carrito_guest";
 
-  // 💾 Persistir carrito en localStorage
+  // 🔄 Cargar carrito al cambiar usuario o login
   useEffect(() => {
-    const carritoGuardado = localStorage.getItem("carrito");
-    if (carritoGuardado) {
-      setCarrito(JSON.parse(carritoGuardado));
+    const key = getCartKey();
+    const guardado = localStorage.getItem(key);
+
+    if (guardado) {
+      setCarrito(JSON.parse(guardado));
+    } else {
+      setCarrito([]); // nuevo user → carrito vacío
     }
-  }, []);
+  }, [user, isLoggedIn]);
 
+  // 💾 Guardar carrito siempre en su propia clave
   useEffect(() => {
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-  }, [carrito]);
+    const key = getCartKey();
+    localStorage.setItem(key, JSON.stringify(carrito));
+  }, [carrito, user, isLoggedIn]);
 
+  // 💰 Total
+  const getTotal = () =>
+    carrito.reduce((acum, p) => {
+      const precio =
+        p.precioNormalizado ?? normalizarPrecio(p.precio ?? p.price ?? "0");
+      return acum + precio * (p.cantidad || 1);
+    }, 0);
+
+  // ➕ Agregar
   const agregarAlCarrito = (producto) => {
-    setCarrito((prevCarrito) => {
-      const productoId = getProductId(producto);
-      const productoExistente = prevCarrito.find(
-        (item) => getProductId(item) === productoId
-      );
+    setCarrito((prev) => {
+      const id = getProductId(producto);
+      const existe = prev.find((p) => getProductId(p) === id);
 
-      if (productoExistente) {
+      if (existe) {
         toast.info(`${getProductName(producto)} (cantidad aumentada)`);
-        return prevCarrito.map((item) =>
-          getProductId(item) === productoId
-            ? { ...item, cantidad: item.cantidad + 1 }
-            : item
+        return prev.map((p) =>
+          getProductId(p) === id ? { ...p, cantidad: p.cantidad + 1 } : p
         );
-      } else {
-        toast.success(`${getProductName(producto)} agregado correctamente`);
-        const precioString = producto.precio ?? producto.price ?? "0";
-        const precioNormalizado = normalizarPrecio(precioString);
-
-        return [
-          ...prevCarrito,
-          {
-            ...producto,
-            cantidad: 1,
-            precioNormalizado,
-          },
-        ];
       }
-    });
 
-    console.log("Producto agregado al carrito:", getProductName(producto));
+      toast.success(`${getProductName(producto)} agregado`);
+      const precioString = producto.precio ?? producto.price ?? "0";
+
+      return [
+        ...prev,
+        {
+          ...producto,
+          cantidad: 1,
+          precioNormalizado: normalizarPrecio(precioString),
+        },
+      ];
+    });
   };
 
+  // 🔼 Incrementar
   const incrementarCantidad = (index) => {
     setCarrito((prev) =>
-      prev.map((item, i) =>
-        i === index ? { ...item, cantidad: item.cantidad + 1 } : item
-      )
+      prev.map((p, i) => (i === index ? { ...p, cantidad: p.cantidad + 1 } : p))
     );
   };
 
+  // 🔽 Decrementar
   const decrementarCantidad = (index) => {
     setCarrito((prev) =>
       prev
-        .map((item, i) =>
-          i === index ? { ...item, cantidad: item.cantidad - 1 } : item
-        )
-        .filter((item) => item.cantidad > 0)
+        .map((p, i) => (i === index ? { ...p, cantidad: p.cantidad - 1 } : p))
+        .filter((p) => p.cantidad > 0)
     );
   };
 
+  // 🧹 Limpiar carrito del usuario activo
   const limpiarCarrito = () => {
+    const key = getCartKey();
     setCarrito([]);
-    localStorage.removeItem("carrito");
+    localStorage.removeItem(key);
   };
 
   return (
@@ -97,10 +99,10 @@ export const CartProvider = ({ children }) => {
       value={{
         carrito,
         agregarAlCarrito,
-        limpiarCarrito,
         incrementarCantidad,
         decrementarCantidad,
-        getTotal, // 👈 Nuevo: accesible desde cualquier parte
+        limpiarCarrito,
+        getTotal,
       }}
     >
       {children}

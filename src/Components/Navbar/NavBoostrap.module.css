@@ -11,7 +11,7 @@
 .cartBadge {
   position: absolute !important;
   top: 5px;
-  left: 65%; /* lo mueve un poco a la izquierda */
+  left: 65%;
   transform: translate(-30%, -30%);
   font-size: 0.7rem;
 }
@@ -66,4 +66,17 @@
   right: 0 !important;
   left: auto !important;
   transform: translateX(-10px); /* opcional, ajusta la posición */
+}
+
+/* Segunda fila: search + cart + login */
+.searchCartLoginRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap; /* evita que los elementos se vayan a otra fila */
+}
+
+.searchCartLoginRow .form-control {
+  flex: 1 1 auto; /* ocupa espacio disponible */
+  min-width: 0; /* importante para que no haga overflow */
 }

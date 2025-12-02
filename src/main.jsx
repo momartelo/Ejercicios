@@ -16,10 +16,10 @@ createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <AlertProvider>
       <AuthProvider>
-        <SearchProvider>
-          <FavoritesProvider>
-            <CartProvider>
-              <CategoryProvider>
+        <CategoryProvider>
+          <CartProvider>
+            <FavoritesProvider>
+              <SearchProvider>
                 <ScrollToTop />
                 <Approuter />
                 <ToastContainer
@@ -33,10 +33,10 @@ createRoot(document.getElementById("root")).render(
                   theme="colored"
                   toastStyle={{ fontSize: "0.8rem" }}
                 />
-              </CategoryProvider>
-            </CartProvider>
-          </FavoritesProvider>
-        </SearchProvider>
+              </SearchProvider>
+            </FavoritesProvider>
+          </CartProvider>
+        </CategoryProvider>
       </AuthProvider>
     </AlertProvider>
   </BrowserRouter>
