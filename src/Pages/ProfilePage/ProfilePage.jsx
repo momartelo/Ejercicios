@@ -4,6 +4,7 @@ import { useAuth } from "../../Context/AuthContex";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const ProfilePage = () => {
   const { user, isAdminIn } = useAuth();
@@ -116,7 +117,31 @@ const ProfilePage = () => {
             >
               Cuenta
             </button>
-            <button type="submit" className={styles.buttonSave}>
+            <button
+              type="submit"
+              className={styles.buttonSave}
+              onClick={() => {
+                Swal.fire({
+                  title: "¿Esta seguro de guardar los cambios?",
+                  text: "Esta acción no se puede deshacer.",
+                  icon: "info",
+                  showCancelButton: true,
+                  confirmButtonText: "Sí, guardar",
+                  cancelButtonText: "Cancelar",
+                  confirmButtonColor: "#d33",
+                  cancelButtonColor: "#3085d6",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    Swal.fire({
+                      title: "Cambios Guardados",
+                      text: "Tus datos se guardaron exitosamente (simulación).",
+                      icon: "success",
+                    });
+                    // acá va la logica cuando haya cambios
+                  }
+                });
+              }}
+            >
               Guardar Cambios
             </button>
           </div>

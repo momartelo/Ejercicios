@@ -3,6 +3,7 @@ import { useAuth } from "../../Context/AuthContex";
 import MainLayout from "../../Layout/MainLayout";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AccountPage = () => {
   const { user, isAdminIn } = useAuth();
@@ -162,7 +163,31 @@ const AccountPage = () => {
               Perfil
             </button>
 
-            <button type="submit" className={styles.buttonSave}>
+            <button
+              type="submit"
+              className={styles.buttonSave}
+              onClick={() => {
+                Swal.fire({
+                  title: "¿Esta seguro de guardar los cambios?",
+                  text: "Esta acción no se puede deshacer.",
+                  icon: "info",
+                  showCancelButton: true,
+                  confirmButtonText: "Sí, guardar",
+                  cancelButtonText: "Cancelar",
+                  confirmButtonColor: "#d33",
+                  cancelButtonColor: "#3085d6",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    Swal.fire({
+                      title: "Cambios Guardados",
+                      text: "Tus datos se guardaron exitosamente (simulación).",
+                      icon: "success",
+                    });
+                    // acá va la logica cuando haya cambios
+                  }
+                });
+              }}
+            >
               Guardar Cambios
             </button>
 
@@ -170,9 +195,25 @@ const AccountPage = () => {
               type="button"
               className={styles.buttonDelete}
               onClick={() => {
-                if (window.confirm("¿Seguro que querés eliminar tu cuenta?")) {
-                  // Lógica de eliminación
-                }
+                Swal.fire({
+                  title: "¿Eliminar cuenta?",
+                  text: "Esta acción no se puede deshacer.",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonText: "Sí, eliminar",
+                  cancelButtonText: "Cancelar",
+                  confirmButtonColor: "#d33",
+                  cancelButtonColor: "#3085d6",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    Swal.fire({
+                      title: "Cuenta eliminada",
+                      text: "Tu cuenta se eliminó (simulación).",
+                      icon: "success",
+                    });
+                    // acá iría la lógica cuando se borre datos
+                  }
+                });
               }}
             >
               Eliminar Cuenta
