@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 
 const ProductForm = () => {
   const navigate = useNavigate();
-  const { id } = useParams(); // si existe → editar
+  const { id } = useParams();
 
   const isEditing = Boolean(id);
   const { categorias, refreshCategorias, setCategory } = useCategory();
@@ -25,7 +25,6 @@ const ProductForm = () => {
     image: "",
   });
 
-  // Cargar datos si es edición
   useEffect(() => {
     const fetchProduct = async () => {
       if (!isEditing) return;

@@ -14,8 +14,7 @@ const CardProyectsPage = () => {
   const [alertMessage, setAlertMessage] = useState("");
 
   const handleClose = (event, reason) => {
-    if (reason === "clickaway") return; // opcional: evita cerrar al hacer click afuera
-    setOpen(false);
+    if (reason === "clickaway") return;
   };
 
   const handleShowAlert = (msg) => {

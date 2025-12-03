@@ -11,6 +11,7 @@ const EditUsersPage = () => {
   useEffect(() => {
     getAllUsers().then(setUsers);
   }, []);
+  console.log(users);
   return (
     <MainLayout>
       <h2 className={styles.title}>Roles de Usuarios Registrados</h2>
@@ -26,6 +27,7 @@ const EditUsersPage = () => {
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Rol</th>
+                <th>Ultimo Login</th>
                 <th>Editar</th>
               </tr>
             </thead>
@@ -37,7 +39,9 @@ const EditUsersPage = () => {
                   <td data-label="Nombre">{u.name}</td>
                   <td data-label="Email">{u.email}</td>
                   <td data-label="Rol">{u.role}</td>
-
+                  <td data-label="UltimoLogin">
+                    {new Date(u.lastLogin).toLocaleDateString()}
+                  </td>
                   <td data-label="Acciones">
                     <button
                       className={styles.editBtn}
@@ -91,62 +95,3 @@ const EditUsersPage = () => {
 };
 
 export default EditUsersPage;
-
-// import React, { useEffect, useState } from "react";
-// import { getAllUsers } from "../../Functions/FetchUsers";
-// import MainLayout from "../../Layout/MainLayout";
-// import styles from "./EditUsersPage.module.css";
-
-// const EditUsersPage = () => {
-//   const [users, setUsers] = useState([]);
-
-//   useEffect(() => {
-//     getAllUsers().then(setUsers);
-//     console.log(users);
-//   }, []);
-//   return (
-//     <MainLayout>
-//       <h2 className={styles.title}>Usuarios Registrados</h2>
-
-//       {users.length === 0 ? (
-//         <p>No hay usuarios</p>
-//       ) : (
-//         <div className={styles.containerTable}>
-//           <table className={styles.table}>
-//             <thead>
-//               <tr>
-//                 <th>ID</th>
-//                 <th>Nombre</th>
-//                 <th>Email</th>
-//                 <th>Rol</th>
-//                 <th>Editar</th>
-//               </tr>
-//             </thead>
-
-//             <tbody>
-//               {users.map((u) => (
-//                 <tr key={u.id}>
-//                   <td data-label="ID">{u.id}</td>
-//                   <td data-label="Nombre">{u.name}</td>
-//                   <td data-label="Email">{u.email}</td>
-//                   <td data-label="Rol">{u.role}</td>
-
-//                   <td data-label="Acciones">
-//                     <button
-//                       className={styles.editBtn}
-//                       onClick={() => setEditingUser(u)}
-//                     >
-//                       ✏️ Editar
-//                     </button>
-//                   </td>
-//                 </tr>
-//               ))}
-//             </tbody>
-//           </table>
-//         </div>
-//       )}
-//     </MainLayout>
-//   );
-// };
-
-// export default EditUsersPage;

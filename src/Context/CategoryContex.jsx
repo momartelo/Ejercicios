@@ -10,14 +10,12 @@ export const CategoryProvider = ({ children }) => {
   const [category, setCategory] = useState("Todas");
   const [isLoading, setIsLoading] = useState(true);
 
-  // 🔄 Función reutilizable para cargar categorías
   const loadCategorias = async () => {
     const data = await getLocalProducts();
     const categoriasUnicas = ["Todas", ...new Set(data.map((p) => p.category))];
     setCategorias(categoriasUnicas);
   };
 
-  // 🔄 Se llama solo al iniciar la app
   useEffect(() => {
     const init = async () => {
       try {
@@ -32,7 +30,6 @@ export const CategoryProvider = ({ children }) => {
     init();
   }, []);
 
-  // 🔄 Se expone esta función para refrescar al editar/agregar productos
   const refreshCategorias = async () => {
     try {
       await loadCategorias();

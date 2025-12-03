@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -18,23 +18,28 @@ import { useSearch } from "../../Context/SearchContex";
 function BootstrapNavBar() {
   const { categorias, category, setCategory, isLoading } = useCategory();
   const { carrito, limpiarCarrito } = useCart();
-  const { isLoggedIn, user, logout, login, isAdminIn } = useAuth();
+  const { isLoggedIn, user, logout, isAdminIn } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const { searchQuery, setSearchQuery } = useSearch();
+  const searchInputRef = useRef(null);
 
   const handleLogoClick = () => {
-    setCategory("Todas"); // reset del filtro
-    navigate("/"); // navegar al inicio después
+    setCategory("Todas");
+    navigate("/");
   };
 
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [showEditDropdown, setShowEditDropdown] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false);
 
   const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
 
   const handleLogout = () => {
-    limpiarCarrito(); // vacía carrito
-    logout(); // cierra sesión
-    navigate("/"); // opcional: redirige al home
+    limpiarCarrito();
+    logout();
+    navigate("/");
   };
 
   const obtenerIniciales = (name) => {
@@ -45,12 +50,14 @@ function BootstrapNavBar() {
       .join("");
   };
 
-  const [openLogin, setOpenLogin] = useState(false);
-
   const handleOpenLogin = () => setOpenLogin(true);
   const handleCloseLogin = () => setOpenLogin(false);
 
-  const { setSearchQuery } = useSearch();
+  useEffect(() => {
+    if (location.pathname === "/" && searchQuery) {
+      searchInputRef.current?.focus();
+    }
+  }, [location.pathname, searchQuery]);
 
   return (
     <Navbar expand="lg" bg="light" variant="light">
@@ -64,7 +71,6 @@ function BootstrapNavBar() {
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavDropdown
@@ -76,7 +82,6 @@ function BootstrapNavBar() {
                 <NavDropdown.Item disabled>Cargando...</NavDropdown.Item>
               ) : (
                 <>
-                  {/* "Todas" Siempre primero */}
                   <NavDropdown.Item
                     key="Todas"
                     active={category === "Todas"}
@@ -88,10 +93,7 @@ function BootstrapNavBar() {
                   >
                     Todas
                   </NavDropdown.Item>
-
                   <NavDropdown.Divider />
-
-                  {/* Resto ordenado alfabéticamente */}
                   {categorias
                     .filter((c) => c !== "Todas")
                     .sort((a, b) => a.localeCompare(b))
@@ -121,6 +123,7 @@ function BootstrapNavBar() {
             <Nav.Link as={Link} to="/contact" className={styles.navLink}>
               Contacto
             </Nav.Link>
+
             {isLoggedIn && isAdminIn && (
               <NavDropdown
                 title="Admin"
@@ -138,24 +141,35 @@ function BootstrapNavBar() {
               </NavDropdown>
             )}
           </Nav>
+
           <Nav className="ms-auto align-items-center d-flex flex-row flex-lg-row gap-2 justify-content-center">
             <Form className="d-flex">
               <Form.Control
                 type="search"
                 placeholder="Buscar productos..."
                 className="me-2"
-                onChange={(e) => setSearchQuery(e.target.value.toLowerCase())}
+                value={searchQuery}
+                onChange={(e) => {
+                  const query = e.target.value.toLowerCase();
+                  setSearchQuery(query);
+
+                  if (query && location.pathname !== "/") {
+                    navigate("/");
+                  }
+                }}
+                ref={searchInputRef}
               />
             </Form>
+
             <Nav.Link as={Link} to="/cart" className={styles.cartLink}>
               <ShoppingCartIcon className={styles.shoppingIcon} />
-
               {totalItems > 0 && (
                 <Badge bg="danger" pill className={styles.cartBadge}>
                   {totalItems}
                 </Badge>
               )}
             </Nav.Link>
+
             {isLoggedIn ? (
               <NavDropdown
                 title={user?.name ? obtenerIniciales(user.name) : "?"}
@@ -185,7 +199,7 @@ function BootstrapNavBar() {
               <Button
                 variant="outline-secondary"
                 onClick={handleOpenLogin}
-                className="buttonLogin ms-2 "
+                className="buttonLogin ms-2"
               >
                 Login
               </Button>

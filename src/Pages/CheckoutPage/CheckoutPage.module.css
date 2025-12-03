@@ -4,12 +4,41 @@
   box-sizing: border-box;
 }
 
+h2 {
+  margin-bottom: 1rem;
+}
+
 .containerCheckoutPage {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   color: #333;
+}
+
+.containerProducts {
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0;
+  padding: 0 1rem 0 1rem;
+  justify-content: center;
+}
+
+.containerProduct {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1rem;
+}
+.containerProduct > img {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+}
+.containerProduct > p {
+  margin: 0;
 }
 
 .containerTotalPay {
@@ -20,6 +49,10 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.containerTotalPay > p {
+  margin: 0;
 }
 
 .totalPayText {
@@ -38,7 +71,6 @@
   column-gap: 1rem;
   justify-content: center;
   width: 80%;
-  margin-top: 1rem;
 }
 
 .containerTypesPay > button {
@@ -87,10 +119,10 @@ button {
   background: #fff;
   border-radius: 12px;
   width: 250px;
-  min-height: 250px; /* un poco más alta para ver bien la diferencia */
+  min-height: 250px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* reparte espacio */
+  justify-content: space-between;
   align-items: center;
   padding: 15px 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -101,4 +133,41 @@ button {
 .containerCartProduct:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px #ffe07c;
+}
+
+.emoji {
+  font-size: 1.5rem; /* Cambiá a lo que quieras */
+  display: inline-block;
+}
+
+.payCash,
+.payDebitCard,
+.payCreditCard {
+  margin-bottom: 0;
+}
+
+.methodPay {
+  font-weight: 600;
+  font-family: "Arial";
+  font-size: 1.25rem;
+}
+
+@media (min-width: 1361px) {
+  .containerCheckoutPage {
+    margin-top: 1rem;
+  }
+
+  .containerCheckoutPage > p {
+    margin: 1rem 0 2rem 0;
+  }
+  .containerTotalPay {
+    margin-top: 2rem;
+  }
+  .containerProducts {
+    gap: 1.5rem;
+  }
+  .containerProduct > img {
+    width: 100px;
+    height: 100px;
+  }
 }

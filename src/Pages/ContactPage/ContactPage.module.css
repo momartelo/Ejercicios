@@ -171,11 +171,12 @@ h2 {
   border: 1px #e4e4e4 solid;
 }
 
-@media (max-width: 1369px) {
+@media (max-width: 1361px) {
   .containerTitle {
     display: flex;
-    column-gap: 1rem;
-    padding-top: 1rem;
+    column-gap: 0.5rem;
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
   }
 
   .containerTitle > img {
@@ -190,12 +191,13 @@ h2 {
   .containerTextsAndForm {
     display: flex;
     flex-direction: row;
-    padding: 2rem 0 0 0;
+    padding: 0.5rem 0 0 0;
     align-items: flex-start;
     justify-content: center;
     width: 100%;
     max-width: 1320px;
     height: 100%;
+    margin-top: 1rem;
   }
 
   .containerTextsForm > p:nth-child(2),

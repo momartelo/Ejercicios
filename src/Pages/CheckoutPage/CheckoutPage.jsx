@@ -5,29 +5,40 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContex";
 import MainLayout from "../../Layout/MainLayout";
 import { lanzarConfeti } from "../../Functions/Confeti.js";
-import { useCart } from "../../Context/CartContext"; // 👈 Importá tu contexto de carrito
+import { useCart } from "../../Context/CartContext";
 
 const CheckoutPage = () => {
-  const { getTotal, limpiarCarrito } = useCart();
+  const { getTotal, limpiarCarrito, carrito } = useCart();
   const total = getTotal();
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
   const [metodoPago, setMetodoPago] = useState("");
-
+  console.log(carrito);
   const handleSeleccion = (metodo) => {
     setMetodoPago(metodo);
   };
 
   const handlePagar = () => {
     lanzarConfeti();
-    // limpiarCarrito();
-    // setTimeout(() => navigate("/"), 3000);
   };
 
   return (
     <MainLayout>
       <div className={styles.containerCheckoutPage}>
-        <h2>Resumen de pago</h2>
+        <h2>Resumen de compra y pago</h2>
+
+        <div>
+          <ul className={styles.containerProducts}>
+            {carrito.map((producto, index) => {
+              return (
+                <li key={index} className={styles.containerProduct}>
+                  <img src={producto.image} />
+                  <p>Cant.: {producto.cantidad}u</p>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
 
         <div className={styles.containerTotalPay}>
           <p className={styles.totalPayText}>Un total de pesos:&nbsp;</p>
@@ -41,27 +52,28 @@ const CheckoutPage = () => {
         <div className={styles.containerTypesPay}>
           <button onClick={() => handleSeleccion("Tarjeta de crédito")}>
             <p className={styles.payCreditCard}>Tarjeta de crédito</p>
-            {emojiMap.credit.emoji}
+            <span className={styles.emoji}>{emojiMap.credit.emoji}</span>
           </button>
 
           <button onClick={() => handleSeleccion("Tarjeta de débito")}>
             <p className={styles.payDebitCard}>Tarjeta de débito</p>
-            {emojiMap.credit.emoji}
+            <span className={styles.emoji}>{emojiMap.credit.emoji}</span>
           </button>
 
           <button onClick={() => handleSeleccion("Efectivo")}>
             <p className={styles.payCash}>Efectivo</p>
-            {emojiMap.bill.emoji}
+            <span className={styles.emoji}>{emojiMap.bill.emoji}</span>
           </button>
         </div>
 
         {metodoPago && (
           <div className={styles.containerConfirmacion}>
             <p>
-              Ud. va a pagar con <strong>{metodoPago}</strong> el monto de{" "}
-              <strong>
+              Ud. va a pagar con{" "}
+              <span className={styles.methodPay}>{metodoPago}</span> el monto de{" "}
+              <span className={styles.methodPay}>
                 ${total.toLocaleString("es-AR", { minimumFractionDigits: 2 })}
-              </strong>
+              </span>
             </p>
             <button className={styles.buttonPay} onClick={handlePagar}>
               Continue con el pago

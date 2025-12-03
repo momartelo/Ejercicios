@@ -6,7 +6,6 @@ import { useAuth } from "../Context/AuthContex";
 const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
-// Helpers
 const getProductId = (p) => p.id || p.title || p.name;
 const getProductName = (p) => p.title ?? p.name ?? "Producto sin nombre";
 
@@ -14,11 +13,9 @@ export const CartProvider = ({ children }) => {
   const [carrito, setCarrito] = useState([]);
   const { user, isLoggedIn } = useAuth();
 
-  // 🔑 Determinar la clave del carrito
   const getCartKey = () =>
     isLoggedIn && user?.id ? `carrito_${user.id}` : "carrito_guest";
 
-  // 🔄 Cargar carrito al cambiar usuario o login
   useEffect(() => {
     const key = getCartKey();
     const guardado = localStorage.getItem(key);
@@ -26,17 +23,15 @@ export const CartProvider = ({ children }) => {
     if (guardado) {
       setCarrito(JSON.parse(guardado));
     } else {
-      setCarrito([]); // nuevo user → carrito vacío
+      setCarrito([]);
     }
   }, [user, isLoggedIn]);
 
-  // 💾 Guardar carrito siempre en su propia clave
   useEffect(() => {
     const key = getCartKey();
     localStorage.setItem(key, JSON.stringify(carrito));
   }, [carrito, user, isLoggedIn]);
 
-  // 💰 Total
   const getTotal = () =>
     carrito.reduce((acum, p) => {
       const precio =
@@ -44,7 +39,6 @@ export const CartProvider = ({ children }) => {
       return acum + precio * (p.cantidad || 1);
     }, 0);
 
-  // ➕ Agregar
   const agregarAlCarrito = (producto) => {
     setCarrito((prev) => {
       const id = getProductId(producto);
@@ -71,14 +65,12 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // 🔼 Incrementar
   const incrementarCantidad = (index) => {
     setCarrito((prev) =>
       prev.map((p, i) => (i === index ? { ...p, cantidad: p.cantidad + 1 } : p))
     );
   };
 
-  // 🔽 Decrementar
   const decrementarCantidad = (index) => {
     setCarrito((prev) =>
       prev
@@ -87,7 +79,6 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  // 🧹 Limpiar carrito del usuario activo
   const limpiarCarrito = () => {
     const key = getCartKey();
     setCarrito([]);

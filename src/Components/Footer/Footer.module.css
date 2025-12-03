@@ -6,7 +6,7 @@
   padding: 0.5rem 1rem;
   bottom: 0;
   left: 0;
-  margin-top: auto; /* solo funciona si el layout general usa flexbox */
+  margin-top: auto;
 }
 
 .content {

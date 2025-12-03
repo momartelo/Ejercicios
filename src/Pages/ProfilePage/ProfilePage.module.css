@@ -117,12 +117,13 @@ input:focus {
 
 @media (max-width: 1369px) {
   .containerProfilePage {
-    padding-top: 10px;
+    padding-top: 0;
   }
   .containerForm {
     width: 95%;
     padding: 10px 20px 10px 20px;
     margin-bottom: 1rem;
+    margin-top: 0;
   }
   .buttonCancel,
   .buttonSave,
@@ -132,6 +133,7 @@ input:focus {
 
   .pageTitle {
     font-size: 1.7rem;
+    margin: 10px 0 10px 0;
   }
 
   .name {

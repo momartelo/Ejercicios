@@ -4,6 +4,9 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+
+import "../../styles/swiper-overrides.css";
+
 import styles from "./Carousel.module.css";
 
 import img1 from "/img/Carousel/CarouselOK1400.png";

@@ -39,7 +39,7 @@
 .groupCountry > div,
 .groupName > div,
 .groupData > div {
-  flex: 1; /* ocupa el mismo ancho proporcional */
+  flex: 1;
 }
 
 .groupAddress input,
@@ -47,7 +47,7 @@
 .groupName input,
 .groupData input {
   width: 100%;
-  box-sizing: border-box; /* importante para padding y border */
+  box-sizing: border-box;
 }
 
 .formName,
@@ -114,6 +114,7 @@
     padding: 10px 20px 10px 20px;
     margin-bottom: 1rem;
     row-gap: 0.75rem;
+    margin-top: 0;
   }
   .buttonCancel,
   .buttonSave,

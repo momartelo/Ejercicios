@@ -39,7 +39,7 @@ const RegisterPage = () => {
       }
 
       Swal.fire("Éxito", "Usuario registrado correctamente 🎉", "success");
-      navigate("/"); // podés mandar a login si querés
+      navigate("/");
     } catch (err) {
       Swal.fire("Error", "Problema con el servidor", "error");
     }

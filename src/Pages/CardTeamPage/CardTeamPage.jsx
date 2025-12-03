@@ -1,8 +1,6 @@
 import styles from "./CardTeamPage.module.css";
-import React from "react";
 import CardTeam from "../../Components/CardTeam/CardTeam";
 import equipo from "../../Data/EquipoTalentoLab";
-import ResponsiveAppBar from "../../Components/Navbar/ResponsiveNavBar";
 import { useNavigate } from "react-router-dom";
 import Button from "../../Components/Button/Button";
 import MainLayout from "../../Layout/MainLayout";

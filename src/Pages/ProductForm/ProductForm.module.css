@@ -93,3 +93,10 @@
   color: #d8a602;
   border: 1px #e4e4e4 solid;
 }
+
+@media (max-width: 1361px) {
+  .container {
+    max-width: 500px;
+    margin: 20px auto;
+  }
+}

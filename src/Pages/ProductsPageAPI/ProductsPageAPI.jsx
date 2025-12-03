@@ -16,7 +16,7 @@ const ProductsPageAPI = () => {
     const fetchProductosAPI = async () => {
       try {
         const data = await getProductsAPI();
-        console.log("Respuesta de la API:", data); // 👈 log completo
+        console.log("Respuesta de la API:", data);
         setProductos(data);
       } catch (error) {
         console.error("Error al traer productos:", error);

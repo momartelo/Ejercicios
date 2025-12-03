@@ -25,7 +25,31 @@ const ProductsPageLocal = () => {
   const [error, setError] = useState(null);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6; // ⭐ cantidad por página
+
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      const width = window.innerWidth;
+
+      if (width < 550) {
+        setItemsPerPage(2);
+      } else if (width < 768) {
+        setItemsPerPage(4);
+      } else if (width < 830) {
+        setItemsPerPage(6);
+      } else if (width < 1370) {
+        setItemsPerPage(8);
+      } else {
+        setItemsPerPage(10);
+      }
+    };
+
+    updateItemsPerPage();
+    window.addEventListener("resize", updateItemsPerPage);
+
+    return () => window.removeEventListener("resize", updateItemsPerPage);
+  }, []);
 
   const { agregarAlCarrito } = useCart();
   const { category, categorias } = useCategory();
@@ -68,12 +92,10 @@ const ProductsPageLocal = () => {
     setFilteredProducts(filtered);
   }, [category, productos, searchQuery]);
 
-  // ⭐ Resetear página cuando cambian los filtros
   useEffect(() => {
     setCurrentPage(1);
   }, [filteredProducts]);
 
-  // ⭐ PAGINACIÓN
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -82,7 +104,6 @@ const ProductsPageLocal = () => {
     indexOfLastItem
   );
 
-  // BORRAR PRODUCTO
   const handleDelete = async (id) => {
     try {
       const result = await Swal.fire({
