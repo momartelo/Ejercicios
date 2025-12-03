@@ -69,94 +69,96 @@ const ProductForm = () => {
   };
 
   return (
-    <MainLayout>
-      <div className={styles.container}>
-        <h1 className={styles.title}>
-          {isEditing ? "Editar Producto" : "Crear Producto"}
-        </h1>
+    <>
+      <MainLayout>
+        <div className={styles.container}>
+          <h1 className={styles.title}>
+            {isEditing ? "Editar Producto" : "Crear Producto"}
+          </h1>
 
-        <form onSubmit={handleSubmit}>
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Título</label>
-            <input
-              className={styles.input}
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-              required
-            />
-          </div>
+          <form onSubmit={handleSubmit}>
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Título</label>
+              <input
+                className={styles.input}
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Precio</label>
-            <input
-              className={styles.input}
-              type="number"
-              name="price"
-              value={formData.price}
-              onChange={handleChange}
-              required
-            />
-          </div>
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Precio</label>
+              <input
+                className={styles.input}
+                type="number"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Descripción</label>
-            <textarea
-              className={styles.textarea}
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-            />
-          </div>
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Descripción</label>
+              <textarea
+                className={styles.textarea}
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+              />
+            </div>
 
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Categoría</label>
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Categoría</label>
 
-            <input
-              className={styles.input}
-              list="lista-categorias"
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              placeholder="Elegir o escribir nueva"
-            />
+              <input
+                className={styles.input}
+                list="lista-categorias"
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                placeholder="Elegir o escribir nueva"
+              />
 
-            <datalist id="lista-categorias">
-              {categorias
-                .filter((c) => c !== "Todas")
-                .map((cat, i) => (
-                  <option key={i} value={cat} />
-                ))}
-            </datalist>
-          </div>
+              <datalist id="lista-categorias">
+                {categorias
+                  .filter((c) => c !== "Todas")
+                  .map((cat, i) => (
+                    <option key={i} value={cat} />
+                  ))}
+              </datalist>
+            </div>
 
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Imagen (URL)</label>
-            <input
-              className={styles.input}
-              type="text"
-              name="image"
-              value={formData.image}
-              onChange={handleChange}
-            />
-          </div>
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Imagen (URL)</label>
+              <input
+                className={styles.input}
+                type="text"
+                name="image"
+                value={formData.image}
+                onChange={handleChange}
+              />
+            </div>
 
-          <div className={styles.containerButtons}>
-            <button
-              className={styles.buttonBack}
-              type="button"
-              onClick={() => navigate(`/`)}
-            >
-              Volver
-            </button>
-            <button className={styles.button} type="submit">
-              {isEditing ? "Guardar Cambios" : "Crear Producto"}
-            </button>
-          </div>
-        </form>
-      </div>
-    </MainLayout>
+            <div className={styles.containerButtons}>
+              <button
+                className={styles.buttonBack}
+                type="button"
+                onClick={() => navigate(`/`)}
+              >
+                Volver
+              </button>
+              <button className={styles.button} type="submit">
+                {isEditing ? "Guardar Cambios" : "Crear Producto"}
+              </button>
+            </div>
+          </form>
+        </div>
+      </MainLayout>
+    </>
   );
 };
 

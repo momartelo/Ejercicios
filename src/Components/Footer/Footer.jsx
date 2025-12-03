@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className={styles.containerFooter}>
       <div className={styles.content}>
         <div className={styles.containerImages}>
-          <img src="./img/metro.png" alt="Eme" className={styles.logo} />
+          <img src="/img/metro.png" alt="Eme" className={styles.logo} />
           <img src="/img/o.png" alt="O" className={styles.logo} />
           <img src="/img/metro.png" alt="Eme" className={styles.logo} />
         </div>

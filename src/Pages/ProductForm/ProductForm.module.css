@@ -1,5 +1,5 @@
 .container {
-  max-width: 600px;
+  max-width: 700px;
   margin: 30px auto;
   background: #ffffff;
   padding: 25px;
@@ -28,21 +28,25 @@
 .input,
 .textarea {
   padding: 10px 12px;
-  border: 1px solid #cccccc;
+  border: 1px solid #c7c7c7;
+  transition: all 0.2s ease;
+  background-color: #fafafa;
+  color: #333;
   border-radius: 8px;
   font-size: 16px;
 }
 
 .input:focus,
 .textarea:focus {
+  border-color: cornflowerblue;
   outline: none;
-  border: 1px solid #007bff;
-  box-shadow: 0 0 4px rgba(25, 22, 206, 0.637);
+  box-shadow: 0 0 4px rgba(100, 149, 237, 0.5);
+  background-color: #fff;
 }
 
 .textarea {
   resize: vertical;
-  min-height: 100px;
+  min-height: 150px;
 }
 
 .containerButtons {
