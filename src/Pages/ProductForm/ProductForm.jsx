@@ -8,6 +8,7 @@ import {
 import styles from "./ProductForm.module.css";
 import MainLayout from "../../Layout/MainLayout";
 import { useCategory } from "../../Context/CategoryContex";
+import Swal from "sweetalert2";
 
 const ProductForm = () => {
   const navigate = useNavigate();
@@ -58,14 +59,29 @@ const ProductForm = () => {
       await createLocalProduct(formData);
     }
 
-    // 🔥 ACTUALIZAR NAV / CATEGORÍAS
     await refreshCategorias();
-
-    // 🔥 Solución a tu problema → volver siempre a "Todas"
     setCategory("Todas");
 
-    // volver al listado
-    navigate("/");
+    Swal.fire({
+      title: "¿Esta seguro de guardar los cambios?",
+      // text: "Esta acción no se puede deshacer.",
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonText: "Sí, guardar",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Cambios Guardados",
+          text: "Tus datos se guardaron exitosamente (simulación).",
+          icon: "success",
+        });
+        // volver al listado
+        navigate("/");
+      }
+    });
   };
 
   return (

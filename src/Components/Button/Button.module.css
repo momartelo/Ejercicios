@@ -3,7 +3,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1.2rem;
-  border: none;
+  border: 1px #d1b146 solid;
   border-radius: 6px;
   font-size: 1rem;
   cursor: pointer;

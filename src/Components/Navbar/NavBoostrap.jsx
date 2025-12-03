@@ -185,9 +185,9 @@ function BootstrapNavBar() {
               <Button
                 variant="outline-secondary"
                 onClick={handleOpenLogin}
-                className="ms-2"
+                className="buttonLogin ms-2 "
               >
-                Loguearse
+                Login
               </Button>
             )}
           </Nav>
